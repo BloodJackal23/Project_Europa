@@ -9,12 +9,13 @@ public class PlanetaryOrbit : CelestialMovement
     protected override void Awake()
     {
         base.Awake();
-        if (!star)
+        if (star == null)
             star = GameObject.FindGameObjectWithTag("Star").GetComponent<CelestialObject>();
     }
 
     private void Start()
     {
+        celestialObject.RigidBody.mass = Random.Range(1f, 100f);
         StartPlanetaryOrbit();
     }
 

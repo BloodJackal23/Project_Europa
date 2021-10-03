@@ -12,11 +12,6 @@ public class CelestialObject : MonoBehaviour
         RigidBody = GetComponent<Rigidbody>();
     }
 
-    private void Start()
-    {
-        Debug.Log("Name = " + ObjectName);
-    }
-
     public float GetGravitationalForce(CelestialObject _target)
     {
         if (_target == this)

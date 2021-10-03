@@ -10,7 +10,6 @@ public class PlanetRandomizer : MonoBehaviour
     private void Awake()
     {
         SetRandomOrbitDirection();
-        celestialObject.RigidBody.mass = Random.Range(1f, 100f);
     }
 
     private void Start()
