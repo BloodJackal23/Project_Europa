@@ -21,7 +21,7 @@ public class PlanetaryOrbit : CelestialMovement
     private void FixedUpdate()
     {
         Vector3 starDirection = (star.transform.position - transform.position).normalized;
-        celestialObject.rigidbody.AddForce(starDirection * celestialObject.GetGravitationalForce(star));
+        celestialObject.RigidBody.AddForce(starDirection * celestialObject.GetGravitationalForce(star));
     }
 
     public void StartPlanetaryOrbit()
@@ -29,6 +29,6 @@ public class PlanetaryOrbit : CelestialMovement
         int cw = -1;
         if (clockwiseOrbit)
             cw *= cw;
-        celestialObject.rigidbody.velocity += celestialObject.GetInitialVelocity(star) * cw;
+        celestialObject.RigidBody.velocity += celestialObject.GetInitialVelocity(star) * cw;
     }
 }
