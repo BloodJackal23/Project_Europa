@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CelestialObject : MonoBehaviour
 {    
-    public const float G = 1000000f;
+    public const float G = 10000f;
     public Rigidbody RigidBody { get; private set; }
     public string ObjectName { get; private set; }
 
