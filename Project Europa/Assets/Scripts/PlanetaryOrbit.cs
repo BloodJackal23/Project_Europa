@@ -31,4 +31,9 @@ public class PlanetaryOrbit : CelestialMovement
             cw *= cw;
         celestialObject.RigidBody.velocity += celestialObject.GetInitialVelocity(star) * cw;
     }
+
+    public void SetOrbitDirection(bool _clockwise)
+    {
+        clockwiseOrbit = _clockwise;
+    }
 }
