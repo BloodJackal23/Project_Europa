@@ -35,28 +35,24 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         transform.Rotate(transform.up, moveInput.x * rotationSpeed * Time.fixedDeltaTime);
-        
-        if(moveInput.y > 0)
+        if (moveInput.y > 0)
         {
-            Vector3 maxforwardVelocity = transform.forward * maxForwardSpeed;
             if (rigidbody.velocity.magnitude < maxForwardSpeed)
-            {
                 rigidbody.AddForce(transform.forward * moveInput.y * acceleration, ForceMode.Acceleration);
-                rigidbody.velocity = ClampVelocity(rigidbody.velocity, transform.forward, maxForwardSpeed);
-            }
-                
+            else
+                rigidbody.velocity = transform.forward * rigidbody.velocity.magnitude;
+
         }
         else if (moveInput.y < 0)
         {
             if (rigidbody.velocity.magnitude < maxBackwardSpeed)
-            {
                 rigidbody.AddForce(transform.forward * moveInput.y * decelearation, ForceMode.Acceleration);
-                rigidbody.velocity = ClampVelocity(rigidbody.velocity, -transform.forward, maxBackwardSpeed);
-            }   
+            else
+                rigidbody.AddForce(-rigidbody.velocity.normalized * decelearation, ForceMode.Acceleration);
         }
         else
         {
-            if(rigidbody.velocity.magnitude > Mathf.Epsilon)
+            if (rigidbody.velocity.magnitude > Mathf.Epsilon)
                 rigidbody.AddForce(-rigidbody.velocity.normalized * brakeForce, ForceMode.Acceleration);
         }
     }
@@ -69,14 +65,5 @@ public class PlayerController : MonoBehaviour
     private Vector2 GetMoveInput()
     {
         return playerInput.PlayerActions.Movement.ReadValue<Vector2>();
-    }
-
-    private Vector3 ClampVelocity(Vector3 _currentVelocity, Vector3 _moveDirection, float _maxSpeed)
-    {
-        Vector3 maxVelocity = _moveDirection * _maxSpeed;
-        float xClamp = Mathf.Clamp(_currentVelocity.x, Mathf.Min(_currentVelocity.x, maxVelocity.x), Mathf.Max(_currentVelocity.x, maxVelocity.x));
-        float yClamp = Mathf.Clamp(_currentVelocity.y, Mathf.Min(_currentVelocity.y, maxVelocity.y), Mathf.Max(_currentVelocity.y, maxVelocity.y));
-        float zClamp = Mathf.Clamp(_currentVelocity.z, Mathf.Min(_currentVelocity.z, maxVelocity.z), Mathf.Max(_currentVelocity.z, maxVelocity.z));
-        return new Vector3(xClamp, yClamp, zClamp);
     }
 }
