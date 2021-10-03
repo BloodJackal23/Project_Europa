@@ -1,10 +1,12 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class PlanetaryOrbit : CelestialMovement
+public class PlanetaryMovement : CelestialMovement
 {
     [FoldoutGroup("External References"), SerializeField] private CelestialObject star;
     [FoldoutGroup("Attributes"), SerializeField] protected bool clockwiseOrbit = true;
+
+    [FoldoutGroup("Attributes")] public bool CanMove = true;
 
     protected override void Awake()
     {
@@ -21,8 +23,11 @@ public class PlanetaryOrbit : CelestialMovement
 
     private void FixedUpdate()
     {
-        Vector3 starDirection = (star.transform.position - transform.position).normalized;
-        celestialObject.RigidBody.AddForce(starDirection * celestialObject.GetGravitationalForce(star));
+        if (CanMove)
+        {
+            Vector3 starDirection = (star.transform.position - transform.position).normalized;
+            celestialObject.RigidBody.AddForce(starDirection * celestialObject.GetGravitationalForce(star));
+        }
     }
 
     public void StartPlanetaryOrbit()

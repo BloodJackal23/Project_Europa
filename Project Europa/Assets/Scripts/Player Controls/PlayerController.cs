@@ -17,13 +17,13 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        playerInput = new PlayerInput();
+        playerInput = InputManager.P_Input;
         rigidbody = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
     {
-        playerInput.Enable();
+        playerInput.PlayerActions.Enable();
     }
 
     void Update()
@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        playerInput.Disable();
+        playerInput.PlayerActions.Disable();
     }
 
     private Vector2 GetMoveInput()
