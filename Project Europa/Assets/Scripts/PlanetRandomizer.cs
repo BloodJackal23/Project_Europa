@@ -33,7 +33,7 @@ public class PlanetRandomizer : MonoBehaviour
 
     private void SetRandomOrbitDirection()
     {
-        int randDirection = Random.Range(0, 1);
+        int randDirection = Random.Range(0, 2);
         if (randDirection == 0)
             planetaryOrbit.SetOrbitDirection(false);
         else
