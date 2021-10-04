@@ -9612,7 +9612,7 @@ MonoBehaviour:
   planets: []
   orbits: []
   activeOrbits: 1
-  g: 10
+  g: 100
 --- !u!1 &818892033
 GameObject:
   m_ObjectHideFlags: 0
@@ -33101,6 +33101,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1418568102466695886, guid: 5da261ac82fdabd45b9770d5a21a588d, type: 3}
+      propertyPath: anchorMarker_1
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418568102466695886, guid: 5da261ac82fdabd45b9770d5a21a588d, type: 3}
+      propertyPath: anchorMarker_2
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7181895418552647608, guid: 5da261ac82fdabd45b9770d5a21a588d, type: 3}
       propertyPath: m_Name
       value: Player

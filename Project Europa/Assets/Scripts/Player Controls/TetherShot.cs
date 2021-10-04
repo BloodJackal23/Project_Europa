@@ -3,12 +3,9 @@ using Sirenix.OdinInspector;
 
 public class TetherShot : MonoBehaviour
 {
+    public delegate void OnTethered(Rigidbody _target);
+    public OnTethered onTethered;
     [FoldoutGroup("Attributes"), SerializeField] private LayerMask targetMask;
-
-    void Start()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,13 +17,22 @@ public class TetherShot : MonoBehaviour
                 GetComponent<ObjectLifespan>().HaltDestruction();
                 transform.position = other.transform.position;
                 FixedJoint targetJoint = gameObject.AddComponent<FixedJoint>();
-                targetJoint.connectedBody = other.GetComponent<Rigidbody>();
+                targetJoint.connectedBody = other.attachedRigidbody;
                 PlanetaryMovement planetaryMovement = other.GetComponent<PlanetaryMovement>();
                 if (planetaryMovement.IsOrbiting)
+                {
                     planetaryMovement.StopPlanetaryOrbit();
+                }
+                    
                 else
                     planetaryMovement.StartPlanetaryOrbit();
+                onTethered?.Invoke(other.attachedRigidbody);
             }
         }
+    }
+
+    private void OnDisable()
+    {
+        onTethered = null;
     }
 }
