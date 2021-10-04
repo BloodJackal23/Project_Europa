@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7181895417133348432}
   - component: {fileID: 1418568102466695886}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tether Shooter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 7181895418552647610}
   - component: {fileID: 7181895418552647615}
   - component: {fileID: 7181895418552647613}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,6 +195,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4ec252d5ed09cdb48ae23434a6a5a0db, type: 3}
       propertyPath: m_Name
       value: SpaceshipCargo
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4ec252d5ed09cdb48ae23434a6a5a0db, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ec252d5ed09cdb48ae23434a6a5a0db, type: 3}

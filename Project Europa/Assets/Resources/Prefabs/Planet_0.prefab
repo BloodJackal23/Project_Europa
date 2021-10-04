@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2740946120236838230}
   - component: {fileID: 2740946120236838231}
   - component: {fileID: 2740946120236838232}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Planet_0
   m_TagString: Planet
   m_Icon: {fileID: 0}
@@ -64,6 +64,7 @@ MonoBehaviour:
   celestialObject: {fileID: 2740946120236838234}
   star: {fileID: 0}
   clockwiseOrbit: 1
+  CanMove: 1
 --- !u!114 &2740946120236838237
 MonoBehaviour:
   m_ObjectHideFlags: 0

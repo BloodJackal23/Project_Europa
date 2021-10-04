@@ -5,7 +5,6 @@ using Sirenix.OdinInspector;
 public class CelestialMovement : MonoBehaviour
 {
     [FoldoutGroup("Components"), SerializeField] protected CelestialObject celestialObject;
-
     protected virtual void Awake()
     {
         if (!celestialObject)

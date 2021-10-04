@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         moveInput = GetMoveInput();
-        Debug.Log(rigidbody.velocity);
     }
 
     private void FixedUpdate()

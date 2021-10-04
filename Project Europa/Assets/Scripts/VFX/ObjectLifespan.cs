@@ -14,4 +14,9 @@ public class ObjectLifespan : MonoBehaviour
         yield return new WaitForSeconds(lifeSpan);
         Destroy(gameObject);
     }
+
+    public void HaltDestruction()
+    {
+        StopAllCoroutines();
+    }
 }

@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4702861350433354553}
+  - component: {fileID: -3568800255141378865}
+  - component: {fileID: 1669984929303947255}
   - component: {fileID: 4702861350433354558}
   - component: {fileID: 8684972535622280373}
-  - component: {fileID: 1669984929303947255}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tether Shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,6 +35,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3568800255141378865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4702861350433354552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f515d59948812124f9dd7d1f752319ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &1669984929303947255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4702861350433354552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f4fbedaf87acb44a59bbe61392aa9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeSpan: 10
 --- !u!135 &4702861350433354558
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -63,19 +92,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 3
---- !u!114 &1669984929303947255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4702861350433354552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96f4fbedaf87acb44a59bbe61392aa9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeSpan: 10
 --- !u!1001 &4702861350430910588
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83,9 +99,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4702861350433354553}
     m_Modifications:
+    - target: {fileID: 5482434500355501296, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482434500355501298, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482434500355501300, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5482434500355501302, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
       propertyPath: m_Name
       value: Tether Shot VFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482434500355501302, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482434500355501304, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482434500355501306, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482434500355501308, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482434500355501310, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5482434500355862742, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
       propertyPath: m_RootOrder

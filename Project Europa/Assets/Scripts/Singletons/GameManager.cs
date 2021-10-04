@@ -46,11 +46,11 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
     }
 
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneSystem.onLoadStart += ActivateLoadingScreen;
-    }
+    //private void OnEnable()
+    //{
+    //    SceneManager.sceneLoaded += OnSceneLoaded;
+    //    SceneSystem.onLoadStart += ActivateLoadingScreen;
+    //}
 
     private void Start()
     {
@@ -58,11 +58,11 @@ public class GameManager : Singleton<GameManager>
         InitGameSettings();
     }
 
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-        SceneSystem.onLoadStart -= ActivateLoadingScreen;
-    }
+    //private void OnDestroy()
+    //{
+    //    SceneManager.sceneLoaded -= OnSceneLoaded;
+    //    SceneSystem.onLoadStart -= ActivateLoadingScreen;
+    //}
 
     void ActivateLoadingScreen()
     {
