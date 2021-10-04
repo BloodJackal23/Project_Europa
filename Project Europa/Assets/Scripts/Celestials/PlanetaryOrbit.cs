@@ -5,6 +5,8 @@ using System.Collections;
 public class PlanetaryOrbit : MonoBehaviour
 {
     [FoldoutGroup("Components"), SerializeField] private MeshRenderer meshRenderer;
+    [FoldoutGroup("Attributes"), SerializeField] private Material clearMat;
+    [FoldoutGroup("Attributes"), SerializeField] private Material dangerMat;
 
     private CelestialObject orbitingPlanet;
     private Collider planetCollider;
@@ -18,18 +20,20 @@ public class PlanetaryOrbit : MonoBehaviour
         planetCollider = orbitingPlanet.GetComponent<Collider>();
         planetaryMovement = orbitingPlanet.GetComponent<PlanetaryMovement>();
         randomizer = orbitingPlanet.GetComponent<PlanetRandomizer>();
+        if (planetaryMovement.IsTethered)
+        {
+            planetaryMovement.onDetached?.Invoke();
+        }
+        planetaryMovement.StartPlanetaryOrbit();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other == planetCollider)
+        if(orbitingPlanet == null && other.gameObject.tag == "Planet")
         {
-            if (planetaryMovement.IsTethered)
-            {
-                planetaryMovement.onDetached?.Invoke();
-            }
-            meshRenderer.enabled = false;
-            planetaryMovement.StartPlanetaryOrbit();
+            orbitingPlanet = other.GetComponent<CelestialObject>();
+            SetPlanet(orbitingPlanet);        
+            meshRenderer.material = clearMat;
             StartCoroutine(RunDisturbance());
         }
     }
@@ -38,8 +42,13 @@ public class PlanetaryOrbit : MonoBehaviour
     {
         if(other == planetCollider)
         {
-            meshRenderer.enabled = true;
             planetaryMovement.StopPlanetaryOrbit();
+            meshRenderer.material = dangerMat;
+            orbitingPlanet = null;
+            planetCollider = null;
+            planetaryMovement = null;
+            randomizer = null;
+            StopAllCoroutines();
         }
     }
 
@@ -52,8 +61,6 @@ public class PlanetaryOrbit : MonoBehaviour
             if (rand < randomizer.DisturbanceChance)
             {
                 orbitingPlanet.RigidBody.AddForce(Random.insideUnitSphere * Random.Range(randomizer.MinDisturbanceForce, randomizer.MaxDisturbanceForce), ForceMode.Impulse);
-                Debug.Log("Random force add to " + gameObject.name);
-                Debug.Log("Random = " + rand.ToString());
             }
         }
     }

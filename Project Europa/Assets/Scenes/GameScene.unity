@@ -4097,6 +4097,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 192715103}
+  clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
+  dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
 --- !u!43 &202672432
 Mesh:
   m_ObjectHideFlags: 0
@@ -9304,6 +9306,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 438918261}
+  clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
+  dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
 --- !u!1 &651107809
 GameObject:
   m_ObjectHideFlags: 0
@@ -13114,13 +13118,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 818892037}
+  clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
+  dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
 --- !u!43 &824054307
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24220
+  m_Name: pb_Mesh24188
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17743,6 +17749,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 836378048}
+  clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
+  dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
 --- !u!1 &957155807
 GameObject:
   m_ObjectHideFlags: 0
@@ -21848,6 +21856,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 957155811}
+  clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
+  dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
 --- !u!1001 &1021513996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22021,7 +22031,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24300
+  m_Name: pb_Mesh24258
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -26557,6 +26567,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 1305920608}
+  clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
+  dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
 --- !u!1001 &1312851780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26751,7 +26763,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24146
+  m_Name: pb_Mesh24120
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27162,7 +27174,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24172
+  m_Name: pb_Mesh24150
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -32038,13 +32050,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 1720781033}
+  clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
+  dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
 --- !u!43 &1755591952
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24160
+  m_Name: pb_Mesh24136
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -32208,7 +32222,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24108
+  m_Name: pb_Mesh24100
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
