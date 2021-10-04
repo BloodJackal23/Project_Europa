@@ -5,8 +5,11 @@ using Sirenix.OdinInspector;
 [RequireComponent(typeof(CelestialObject))]
 public class PlanetaryMovement : CelestialMovement
 {
+    public delegate void OnDetached();
+    public OnDetached onDetached;
     [FoldoutGroup("Attributes"), SerializeField] protected bool clockwiseOrbit = true;
     public bool IsOrbiting { get; private set; }
+    public bool IsTethered { get; private set; }
 
     protected override void Awake()
     {
@@ -16,7 +19,6 @@ public class PlanetaryMovement : CelestialMovement
     private void Start()
     {
         celestialObject.RigidBody.mass = Random.Range(1f, 100f);
-        StartPlanetaryOrbit();
     }
 
     private void AddPlanetForwardForce()
@@ -34,14 +36,20 @@ public class PlanetaryMovement : CelestialMovement
 
     public void StartPlanetaryOrbit()
     {
-        IsOrbiting = true;
-        StartCoroutine(RunOrbit());
+        if (!IsOrbiting)
+        {
+            IsOrbiting = true;
+            StartCoroutine(RunOrbit());
+        }
     }
 
     public void StopPlanetaryOrbit()
     {
-        StopAllCoroutines();
-        IsOrbiting = false;
+        if (IsOrbiting)
+        {
+            StopAllCoroutines();
+            IsOrbiting = false;
+        }
     }
 
     private IEnumerator RunOrbit()
@@ -54,5 +62,10 @@ public class PlanetaryMovement : CelestialMovement
                 * celestialObject.GetGravitationalForce(SolarSystemGenerator.instance.Star));
             yield return new WaitForFixedUpdate();
         }
+    }
+
+    public void SetTethered(bool _tethered)
+    {
+        IsTethered = _tethered;
     }
 }

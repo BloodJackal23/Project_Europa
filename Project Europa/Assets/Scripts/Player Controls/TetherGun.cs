@@ -13,13 +13,14 @@ public class TetherGun : MonoBehaviour
     [FoldoutGroup("Attributes"), SerializeField, Range(0f, 200f)] private float tetherLength = 10f;
 
     public bool IsTethered { get; private set; }
-    public Transform TetherTarget { get; private set; }
+    //public Transform TetherTarget { get; private set; }
 
     public bool ReadyToFire { get; private set; }
 
     private void OnEnable()
     {
         InputManager.P_Input.PlayerActions.Fire.performed += context => Shoot();
+        InputManager.P_Input.PlayerActions.Detach.performed += context => StopTethering();
         ReadyToFire = true;
         tetherLine.enabled = false;
     }
@@ -27,6 +28,7 @@ public class TetherGun : MonoBehaviour
     private void OnDisable()
     {
         InputManager.P_Input.PlayerActions.Fire.performed -= context => Shoot();
+        InputManager.P_Input.PlayerActions.Detach.performed -= context => StopTethering();
     }
 
     private void Shoot()
@@ -35,7 +37,7 @@ public class TetherGun : MonoBehaviour
         {
             GameObject newShot = Instantiate(tetherShotPrefab, transform.position, transform.rotation);
             newShot.GetComponent<Rigidbody>().AddForce(transform.forward * shotSpeed, ForceMode.Impulse);
-            newShot.GetComponent<TetherShot>().onTethered += AttachTether;
+            newShot.GetComponent<TetherShot>().onHit += AttachTether;
             ReadyToFire = false;
             StartCoroutine(WaitForNextShot());
         }
@@ -54,29 +56,32 @@ public class TetherGun : MonoBehaviour
 
     private IEnumerator StartTethering(Rigidbody _target)
     {
-        TetherTarget = _target.transform;
+        Transform TetherTarget = _target.transform;
+        PlanetaryMovement planetaryMovement = _target.GetComponent<PlanetaryMovement>();
+        planetaryMovement.onDetached += StopTethering;
         Vector3 targetDirection = (transform.position - TetherTarget.position).normalized;
         tetherLine.enabled = true;
         while(IsTethered && Vector3.Distance(transform.position, TetherTarget.position) > tetherLength)
         {
-            _target.MovePosition(TetherTarget.position + targetDirection * tetherPullForce * Time.fixedDeltaTime);
-            DisplayTetherLine();
+            _target.AddForce(targetDirection * tetherPullForce, ForceMode.VelocityChange);
+            DisplayTetherLine(_target.transform.position);
             yield return new WaitForFixedUpdate();
         }
         _target.velocity *= 0;
         tetherJoint.connectedBody = _target;
         while (IsTethered)
         {
-            DisplayTetherLine();
+            DisplayTetherLine(_target.transform.position);
             yield return new WaitForFixedUpdate();
         }
-        DetachTether(_target);
+        planetaryMovement.onDetached?.Invoke();
+        planetaryMovement.onDetached -= StopTethering;
     }
 
-    private void DisplayTetherLine()
+    private void DisplayTetherLine(Vector3 _target)
     {
         tetherLine.SetPosition(0, transform.position);
-        tetherLine.SetPosition(1, TetherTarget.position);
+        tetherLine.SetPosition(1, _target);
     }
 
     private void AttachTether(Rigidbody _target)
@@ -85,7 +90,7 @@ public class TetherGun : MonoBehaviour
         StartCoroutine(StartTethering(_target));
     }
 
-    private void DetachTether(Rigidbody _target)
+    private void StopTethering()
     {
         IsTethered = false;
         tetherLine.enabled = false;
