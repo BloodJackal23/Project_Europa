@@ -52,11 +52,11 @@ public class GameManager : Singleton<GameManager>
     //    SceneSystem.onLoadStart += ActivateLoadingScreen;
     //}
 
-    private void Start()
-    {
-        InitSceneSettings();
-        InitGameSettings();
-    }
+    //private void Start()
+    //{
+    //    InitSceneSettings();
+    //    InitGameSettings();
+    //}
 
     //private void OnDestroy()
     //{
