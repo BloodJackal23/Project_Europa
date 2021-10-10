@@ -3,20 +3,16 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CelestialObject : MonoBehaviour
 {
-    public Rigidbody RigidBody { get; private set; }
+    [SerializeField] protected Rigidbody rigidbody;
+    public Rigidbody RigidBody { get { return rigidbody; } }
     public string ObjectName { get; private set; }
-
-    private void Awake()
-    {
-        RigidBody = GetComponent<Rigidbody>();
-    }
 
     public float GetGravitationalForce(CelestialObject _target)
     {
         if (_target == this)
             return 0;
-        float m1 = RigidBody.mass;
-        float m2 = _target.RigidBody.mass;
+        float m1 = rigidbody.mass;
+        float m2 = _target.rigidbody.mass;
         float r = Vector3.Magnitude(_target.transform.position - transform.position);
         return (SolarSystemGenerator.instance.G * (m1 * m2) / (r * r));
     }
@@ -25,7 +21,7 @@ public class CelestialObject : MonoBehaviour
     {
         if (_target == this)
             return Vector3.zero;
-        float m2 = _target.RigidBody.mass;
+        float m2 = _target.rigidbody.mass;
         Vector3 direction = (_target.transform.position - transform.position).normalized;
         Vector3 perp = new Vector3(-direction.z, 0, direction.x);
         float r = Vector3.Distance(transform.position, _target.transform.position);

@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0ce276a1a95c0449acf926d59bc097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigidbody: {fileID: 2740946120236838232}
 --- !u!114 &2740946120236838235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +80,7 @@ MonoBehaviour:
   planetaryMovement: {fileID: 2740946120236838235}
   proceduralPlanetData: {fileID: 11400000, guid: 7fc4d5fe05522134bb7b869802d39c8c, type: 2}
   minDisturbanceForce: 4
-  macDisturbanceForce: 10
+  maxDisturbanceForce: 10
   disturbanceChance: 0.8
   disturbanceInterval: 1
 --- !u!33 &2740946120236838233
