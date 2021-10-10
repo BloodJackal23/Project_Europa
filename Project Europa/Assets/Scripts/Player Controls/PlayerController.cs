@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         playerInput = InputManager.P_Input;
-        rigidbody = GetComponent<Rigidbody>();
+        if(rigidbody == null)
+            rigidbody = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
