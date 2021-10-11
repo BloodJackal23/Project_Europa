@@ -3,9 +3,9 @@ using Sirenix.OdinInspector;
 
 public class PlanetRandomizer : MonoBehaviour
 {
-    [FoldoutGroup("Components"), SerializeField] private CelestialObject celestialObject;
+    [FoldoutGroup("Components"), SerializeField] private CelestialObjectData celestialObject;
     [FoldoutGroup("Components"), SerializeField] private PlanetaryMovement planetaryMovement;
-    [FoldoutGroup("Components"), SerializeField] private ProceduralPlanetData proceduralPlanetData;
+    [FoldoutGroup("Components"), SerializeField] private ProceduralPlanetLibrary proceduralPlanetData;
 
     [FoldoutGroup("Attributes"), SerializeField] private float minDisturbanceForce = 4f;
     [FoldoutGroup("Attributes"), SerializeField] private float maxDisturbanceForce = 10f;

@@ -4,14 +4,14 @@ using Sirenix.OdinInspector;
 
 public class SolarSystemGenerator : Singleton<SolarSystemGenerator>
 {
-    [FoldoutGroup("Children"), SerializeField] private CelestialObject star;
-    [FoldoutGroup("Children"), SerializeField] private CelestialObject[] planets;
+    [FoldoutGroup("Children"), SerializeField] private CelestialObjectData star;
+    [FoldoutGroup("Children"), SerializeField] private PlanetData[] planets;
     [FoldoutGroup("Children"), SerializeField] private PlanetaryOrbit[] orbits;
 
     [FoldoutGroup("Attributes"), SerializeField, Range(1, 7)] int activeOrbits;
     [FoldoutGroup("Attributes"), SerializeField, Range(1f, 999999999f)] private float g;
 
-    public CelestialObject Star { get { return star; } }
+    public CelestialObjectData Star { get { return star; } }
     public float G { get { return g; } }
 
     protected override void Awake()
@@ -29,7 +29,7 @@ public class SolarSystemGenerator : Singleton<SolarSystemGenerator>
     {
         if(activeOrbits < 7)
         {
-            foreach (CelestialObject planet in planets)
+            foreach (PlanetData planet in planets)
             {
                 planet.gameObject.SetActive(false);
             }

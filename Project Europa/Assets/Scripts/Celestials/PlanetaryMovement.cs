@@ -2,23 +2,22 @@ using UnityEngine;
 using System.Collections;
 using Sirenix.OdinInspector;
 
-[RequireComponent(typeof(CelestialObject))]
+[RequireComponent(typeof(PlanetData))]
 public class PlanetaryMovement : CelestialMovement
 {
     public delegate void OnDetached();
     public OnDetached onDetached;
-    [FoldoutGroup("Attributes"), SerializeField] protected bool clockwiseOrbit = true;
+
+    [FoldoutGroup("Components"), SerializeField] private PlanetData planetData;
+    [FoldoutGroup("Attributes"), SerializeField] private bool clockwiseOrbit = true;
     public bool IsOrbiting { get; private set; }
     public bool IsTethered { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
-    }
-
-    private void Start()
-    {
-        celestialObject.RigidBody.mass = Random.Range(1f, 100f);
+        if (planetData == null)
+            planetData = GetComponent<PlanetData>();
     }
 
     private void AddPlanetForwardForce()
@@ -26,7 +25,7 @@ public class PlanetaryMovement : CelestialMovement
         int cw = -1;
         if (clockwiseOrbit)
             cw *= cw;
-        celestialObject.RigidBody.velocity += celestialObject.GetInitialVelocity(SolarSystemGenerator.instance.Star) * cw;
+        planetData.RigidBody.velocity += planetData.GetInitialVelocity(SolarSystemGenerator.instance.Star) * cw;
     }
 
     public void SetOrbitDirection(bool _clockwise)
@@ -54,12 +53,12 @@ public class PlanetaryMovement : CelestialMovement
 
     private IEnumerator RunOrbit()
     {
-        celestialObject.RigidBody.velocity *= 0;
+        planetData.RigidBody.velocity *= 0;
         AddPlanetForwardForce();
         while (IsOrbiting)
         {
-            celestialObject.RigidBody.AddForce((SolarSystemGenerator.instance.Star.transform.position - transform.position).normalized
-                * celestialObject.GetGravitationalForce(SolarSystemGenerator.instance.Star));
+            planetData.RigidBody.AddForce((SolarSystemGenerator.instance.Star.transform.position - transform.position).normalized
+                * planetData.GetGravitationalForce(SolarSystemGenerator.instance.Star));
             yield return new WaitForFixedUpdate();
         }
     }

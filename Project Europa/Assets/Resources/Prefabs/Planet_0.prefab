@@ -9,9 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2740946120236838228}
-  - component: {fileID: 2740946120236838234}
+  - component: {fileID: 3218494574914477874}
   - component: {fileID: 2740946120236838235}
-  - component: {fileID: 2740946120236838237}
   - component: {fileID: 2740946120236838233}
   - component: {fileID: 2740946120236838230}
   - component: {fileID: 2740946120236838231}
@@ -32,12 +31,12 @@ Transform:
   m_GameObject: {fileID: 2740946120236838229}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 98.5, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2740946120236838234
+--- !u!114 &3218494574914477874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,10 +45,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2740946120236838229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a0ce276a1a95c0449acf926d59bc097, type: 3}
+  m_Script: {fileID: 11500000, guid: f902682d1063b8341b56b2b3cb618eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 2740946120236838232}
+  collider: {fileID: 2740946120236838231}
+  meshRenderer: {fileID: 2740946120236838230}
+  library: {fileID: 11400000, guid: 7fc4d5fe05522134bb7b869802d39c8c, type: 2}
 --- !u!114 &2740946120236838235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,27 +64,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b22fb39878b53459e6544e8c627a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  celestialObject: {fileID: 2740946120236838234}
+  planetData: {fileID: 3218494574914477874}
   clockwiseOrbit: 1
---- !u!114 &2740946120236838237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2740946120236838229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d119e96c99ca9c3408c1a8e8e0efbd0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  celestialObject: {fileID: 2740946120236838234}
-  planetaryMovement: {fileID: 2740946120236838235}
-  proceduralPlanetData: {fileID: 11400000, guid: 7fc4d5fe05522134bb7b869802d39c8c, type: 2}
-  minDisturbanceForce: 4
-  maxDisturbanceForce: 10
-  disturbanceChance: 0.8
-  disturbanceInterval: 1
 --- !u!33 &2740946120236838233
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -143,7 +126,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2740946120236838232
 Rigidbody:

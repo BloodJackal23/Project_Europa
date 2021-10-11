@@ -1,13 +1,16 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class CelestialObject : MonoBehaviour
+public class CelestialObjectData : MonoBehaviour
 {
-    [SerializeField] protected Rigidbody rigidbody;
+    [FoldoutGroup("Components"), SerializeField] protected Rigidbody rigidbody;
+    [FoldoutGroup("Components"), SerializeField] protected Collider collider;
+    [FoldoutGroup("Components"), SerializeField] protected MeshRenderer meshRenderer;
     public Rigidbody RigidBody { get { return rigidbody; } }
     public string ObjectName { get; private set; }
 
-    public float GetGravitationalForce(CelestialObject _target)
+    public float GetGravitationalForce(CelestialObjectData _target)
     {
         if (_target == this)
             return 0;
@@ -17,7 +20,7 @@ public class CelestialObject : MonoBehaviour
         return (SolarSystemGenerator.instance.G * (m1 * m2) / (r * r));
     }
 
-    public Vector3 GetInitialVelocity(CelestialObject _target)
+    public Vector3 GetInitialVelocity(CelestialObjectData _target)
     {
         if (_target == this)
             return Vector3.zero;
