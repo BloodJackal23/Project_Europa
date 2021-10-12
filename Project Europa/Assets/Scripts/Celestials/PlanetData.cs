@@ -29,11 +29,6 @@ public class PlanetData : CelestialObjectData
     {
         rigidbody.mass = attributes.Mass;
         transform.localScale *= attributes.Scale;
-        //if(collider.GetType() == typeof(SphereCollider))
-        //{
-        //    SphereCollider sphereCollider = collider.GetComponent<SphereCollider>();
-        //    sphereCollider.radius *= attributes.Scale;
-        //}
         meshRenderer.material = attributes.ObjectMaterial;
     }
 }

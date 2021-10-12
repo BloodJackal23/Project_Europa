@@ -19,7 +19,6 @@ public class PlanetaryOrbit : MonoBehaviour
         orbitingPlanet = _planet;
         planetCollider = orbitingPlanet.GetComponent<Collider>();
         planetaryMovement = orbitingPlanet.GetComponent<PlanetaryMovement>();
-        //randomizer = orbitingPlanet.GetComponent<PlanetRandomizer>();
         if (planetaryMovement.IsTethered)
         {
             planetaryMovement.onDetached?.Invoke();

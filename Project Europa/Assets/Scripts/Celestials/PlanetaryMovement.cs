@@ -9,7 +9,6 @@ public class PlanetaryMovement : CelestialMovement
     public OnDetached onDetached;
 
     [FoldoutGroup("Components"), SerializeField] private PlanetData planetData;
-    [FoldoutGroup("Attributes"), SerializeField] private bool clockwiseOrbit = true;
     public bool IsOrbiting { get; private set; }
     public bool IsTethered { get; private set; }
 
@@ -23,14 +22,9 @@ public class PlanetaryMovement : CelestialMovement
     private void AddPlanetForwardForce()
     {
         int cw = -1;
-        if (clockwiseOrbit)
+        if (planetData.ClockwiseOrbit)
             cw *= cw;
         planetData.RigidBody.velocity += planetData.GetInitialVelocity(SolarSystemGenerator.instance.Star) * cw;
-    }
-
-    public void SetOrbitDirection(bool _clockwise)
-    {
-        clockwiseOrbit = _clockwise;
     }
 
     public void StartPlanetaryOrbit()

@@ -17,11 +17,6 @@ public class PlanetRandomizer : MonoBehaviour
     public float DisturbanceChance { get { return disturbanceChance; } }
     public float DisturbanceInterval { get { return disturbanceInterval; } }
 
-    private void Awake()
-    {
-        SetRandomOrbitDirection();
-    }
-
     private void Start()
     {
         GeneraterandomName();
@@ -44,14 +39,5 @@ public class PlanetRandomizer : MonoBehaviour
     private void SetRandomMaterial()
     {
         GetComponent<MeshRenderer>().material = proceduralPlanetData.Materials[Random.Range(0, proceduralPlanetData.Materials.Length)];
-    }
-
-    private void SetRandomOrbitDirection()
-    {
-        int randDirection = Random.Range(0, 2);
-        if (randDirection == 0)
-            planetaryMovement.SetOrbitDirection(false);
-        else
-            planetaryMovement.SetOrbitDirection(true);
     }
 }
