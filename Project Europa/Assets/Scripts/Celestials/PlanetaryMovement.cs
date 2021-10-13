@@ -2,28 +2,29 @@ using UnityEngine;
 using System.Collections;
 using Sirenix.OdinInspector;
 
-[RequireComponent(typeof(PlanetData))]
 public class PlanetaryMovement : CelestialMovement
 {
     public delegate void OnDetached();
     public OnDetached onDetached;
 
-    [FoldoutGroup("Components"), SerializeField] private PlanetData planetData;
+    private PlanetData planetData;
+
+    public float speed = 1;
     public bool IsOrbiting { get; private set; }
     public bool IsTethered { get; private set; }
 
-    private void Awake()
+    override protected void Awake()
     {
-        if (planetData == null)
-            planetData = GetComponent<PlanetData>();
+        base.Awake();
+        planetData = (PlanetData)celestialData;
     }
 
-    private void AddPlanetForwardForce()
+    private void AddPlanetInitialForce(CelestialObjectData _target)
     {
         int cw = -1;
         if (planetData.ClockwiseOrbit)
             cw *= cw;
-        planetData.RigidBody.velocity += GetInitialOrbitalVelocity(SolarSystemGenerator.instance.Star) * cw;
+        planetData.RigidBody.velocity += GetInitialVelocity(_target) * cw;
     }
 
     public void StartPlanetaryOrbit()
@@ -44,7 +45,7 @@ public class PlanetaryMovement : CelestialMovement
         }
     }
 
-    public Vector3 GetInitialOrbitalVelocity(CelestialObjectData _target)
+    private Vector3 GetInitialVelocity(CelestialObjectData _target)
     {
         if (_target == this)
             return Vector3.zero;
@@ -52,17 +53,17 @@ public class PlanetaryMovement : CelestialMovement
         Vector3 direction = (_target.transform.position - transform.position).normalized;
         Vector3 perp = new Vector3(-direction.z, 0, direction.x);
         float r = Vector3.Distance(transform.position, _target.transform.position);
-        return perp * Mathf.Sqrt((SolarSystemGenerator.instance.G * m2) / r);
+        return perp * Mathf.Sqrt(SolarSystemGenerator.Instance.G * m2 / r) * speed;
     }
 
     private IEnumerator RunOrbit()
     {
         planetData.RigidBody.velocity *= 0;
-        AddPlanetForwardForce();
-        while (IsOrbiting)
+        CelestialObjectData starData = SolarSystemGenerator.Instance.Star;
+        AddPlanetInitialForce(starData);
+        while (!IsTethered)
         {
-            planetData.RigidBody.AddForce((SolarSystemGenerator.instance.Star.transform.position - transform.position).normalized
-                * GetGravitationalForce(SolarSystemGenerator.instance.Star));
+            planetData.RigidBody.AddForce((starData.transform.position - transform.position).normalized * GetGravitationalForce(starData));
             yield return new WaitForFixedUpdate();
         }
     }

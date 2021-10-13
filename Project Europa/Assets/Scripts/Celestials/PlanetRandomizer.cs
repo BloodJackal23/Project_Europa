@@ -33,7 +33,6 @@ public class PlanetRandomizer : MonoBehaviour
         int rand = Random.Range(0, proceduralPlanetData.PlanetsNames.Length);
         string newName = proceduralPlanetData.PlanetsNames[rand];
         rand = Random.Range(1, 100);
-        celestialObject.SetName(newName + "-" + rand.ToString("000"));
     }
 
     private void SetRandomMaterial()

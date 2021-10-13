@@ -150,9 +150,9 @@ public class GameManager : Singleton<GameManager>
     #region Audio Settings Methods
     void InitSceneSettings()
     {
-        if(sceneSettings != SceneSettings.instance)
+        if(sceneSettings != SceneSettings.Instance)
         {
-            sceneSettings = SceneSettings.instance;
+            sceneSettings = SceneSettings.Instance;
             //if (sceneSettings.CanPause)
             //{
             //    InputManager.P_Input.Player_Default.PauseGame.performed += PauseCommand;

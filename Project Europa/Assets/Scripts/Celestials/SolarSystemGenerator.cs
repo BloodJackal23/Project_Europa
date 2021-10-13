@@ -9,7 +9,7 @@ public class SolarSystemGenerator : Singleton<SolarSystemGenerator>
     [FoldoutGroup("Children"), SerializeField] private PlanetaryOrbit[] orbits;
 
     [FoldoutGroup("Attributes"), SerializeField, Range(1, 7)] int activeOrbits;
-    [FoldoutGroup("Attributes"), SerializeField, Range(1f, 999999999f)] private float g;
+    [FoldoutGroup("Attributes"), SerializeField, Range(1f, 9999999f)] private float g;
     [FoldoutGroup("Attributes"), SerializeField, Range(-10f, 10f)] private float orbitalOffset = -2.5f;
 
     public CelestialObjectData Star { get { return star; } }
@@ -36,7 +36,7 @@ public class SolarSystemGenerator : Singleton<SolarSystemGenerator>
                 int rand = 0;
                 do
                 {
-                    rand = Random.Range(0, activeOrbits + 1);
+                    rand = Random.Range(0, activeOrbits);
                 }
                 while (selectedOrbits.Contains(orbits[rand]));
                 AssignPlanetToOrbit(orbits[rand], planets[rand]);

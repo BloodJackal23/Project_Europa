@@ -4,11 +4,9 @@ using Procedural;
 
 public class PlanetData : CelestialObjectData
 {
-    [FoldoutGroup("Components"), SerializeField] private ProceduralPlanetLibrary library;
-    [FoldoutGroup("Attributes"), SerializeField] private CelestialAttributes attributes;
+    [FoldoutGroup("Components"), SerializeField] private ProceduralPlanetLibrary planetLibrary;
 
-    public ProceduralPlanetLibrary Library { get { return library; } }
-    public CelestialAttributes Attributes { get { return attributes; } }
+    public ProceduralPlanetLibrary PlanetLibrary { get { return planetLibrary; } }
     public bool ClockwiseOrbit { get; private set; }
 
     private void Awake()
@@ -19,7 +17,7 @@ public class PlanetData : CelestialObjectData
 
     private void InitializeProceduralData()
     {
-        attributes = CelestialProceduralGenerator.RandomizedAttributes(library);
+        attributes = CelestialProceduralGenerator.RandomizedAttributes(planetLibrary);
         ClockwiseOrbit = true;
         if (Random.Range(0, 2) > 0)
             ClockwiseOrbit = false;

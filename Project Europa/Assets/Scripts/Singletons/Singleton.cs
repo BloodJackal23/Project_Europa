@@ -2,7 +2,7 @@
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    public static T instance { get; private set; }
+    public static T Instance { get; private set; }
     protected bool dontDestroyOnLoad = true;
     protected virtual void Awake()
     {
@@ -11,9 +11,9 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     void Init(bool _dontDestroyOnLoad)
     {
-        if (!instance)
+        if (!Instance)
         {
-            instance = FindObjectOfType<T>();
+            Instance = FindObjectOfType<T>();
             if(_dontDestroyOnLoad)
             {
                 DontDestroyOnLoad(gameObject);

@@ -6,11 +6,14 @@ public class CelestialObjectData : MonoBehaviour
 {
     [FoldoutGroup("Components"), SerializeField] protected Rigidbody rigidbody;
     [FoldoutGroup("Components"), SerializeField] protected MeshRenderer meshRenderer;
-    public Rigidbody RigidBody { get { return rigidbody; } }
-    public string ObjectName { get; private set; }
 
-    public void SetName(string _value)
-    {
-        ObjectName = _value;
+    [FoldoutGroup("Attributes"), SerializeField] protected CelestialAttributes attributes;
+    public Rigidbody RigidBody { get 
+        {
+            if (rigidbody == null)
+                rigidbody = GetComponent<Rigidbody>();
+            return rigidbody; 
+        } 
     }
+    public CelestialAttributes Attributes { get { return attributes; } }
 }
