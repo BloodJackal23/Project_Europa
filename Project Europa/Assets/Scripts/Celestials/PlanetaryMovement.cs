@@ -8,8 +8,6 @@ public class PlanetaryMovement : CelestialMovement
     public OnDetached onDetached;
 
     private PlanetData planetData;
-
-    public float speed = 1;
     public bool IsOrbiting { get; private set; }
     public bool IsTethered { get; private set; }
 
@@ -53,7 +51,7 @@ public class PlanetaryMovement : CelestialMovement
         Vector3 direction = (_target.transform.position - transform.position).normalized;
         Vector3 perp = new Vector3(-direction.z, 0, direction.x);
         float r = Vector3.Distance(transform.position, _target.transform.position);
-        return perp * Mathf.Sqrt(SolarSystemGenerator.Instance.G * m2 / r) * speed;
+        return perp * Mathf.Sqrt(SolarSystemGenerator.Instance.G * m2 / r);
     }
 
     private IEnumerator RunOrbit()

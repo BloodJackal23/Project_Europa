@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hex_Orbit_Danger
-  m_Shader: {fileID: -6465566751694194690, guid: 906d2ccd2736c23498493d8563a2b448, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 6ac8906ba61ec444fb035ec3b70c3f76, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -82,6 +82,7 @@ Material:
     m_Floats:
     - Vector1_832153dc455b4420a968f03e0c6ea304: -0.02
     - Vector1_8b25ffb4192842638354294d7e6f5c0f: 5
+    - Vector1_ea105e26c464467abb1e67bed7686411: 2
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -109,6 +110,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_1: {r: 1, g: 0.20507877, b: 0, a: 0}
     - Color_261df651fd8e4161ac5f1f410f8b4e15: {r: 1, g: 0.205793, b: 0, a: 0}
     - Color_ca2d1337664c47819f75f762e417f684: {r: 0, g: 0.8317747, b: 1, a: 0}
     - Vector2_06ad21638a2f414297f81a443f9b87f6: {r: 0.025, g: 0.025, b: 0, a: 0}

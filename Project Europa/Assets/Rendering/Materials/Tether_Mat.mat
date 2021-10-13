@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Tether_Mat
-  m_Shader: {fileID: -6465566751694194690, guid: 30477097e9159e14785d25b901f8acac, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 6ac8906ba61ec444fb035ec3b70c3f76, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -81,6 +81,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_832153dc455b4420a968f03e0c6ea304: -0.02
+    - Vector1_ea105e26c464467abb1e67bed7686411: 2
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -108,7 +109,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_261df651fd8e4161ac5f1f410f8b4e15: {r: 0, g: 0.5810094, b: 1, a: 0}
+    - Color_1: {r: 0, g: 1.8588235, b: 2, a: 0}
+    - Color_261df651fd8e4161ac5f1f410f8b4e15: {r: 0, g: 0.9262848, b: 1, a: 0}
     - Vector2_06ad21638a2f414297f81a443f9b87f6: {r: 0.25, g: 0.25, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
