@@ -7,12 +7,14 @@ public class PlanetaryOrbit : MonoBehaviour
     [FoldoutGroup("Components"), SerializeField] private MeshRenderer meshRenderer;
     [FoldoutGroup("Attributes"), SerializeField] private Material clearMat;
     [FoldoutGroup("Attributes"), SerializeField] private Material dangerMat;
+    [FoldoutGroup("Attributes"), SerializeField, Range(0f, 900f)] private float radius;
 
     private CelestialObjectData orbitingPlanet;
     private Collider planetCollider;
     private PlanetaryMovement planetaryMovement;
     //private PlanetRandomizer randomizer;
     public CelestialObjectData OrbitingPlanet { get { return orbitingPlanet; } }
+    public float Radius { get { return radius; } }
 
     public void SetPlanet(CelestialObjectData _planet)
     {

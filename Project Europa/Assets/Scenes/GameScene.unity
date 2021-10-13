@@ -215,18 +215,18 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 192715105}
+  - component: {fileID: 192715106}
   - component: {fileID: 192715104}
   - component: {fileID: 192715103}
   - component: {fileID: 192715102}
   - component: {fileID: 192715101}
-  - component: {fileID: 192715106}
   m_Layer: 0
   m_Name: Orbit_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &192715101
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4133,6 +4133,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 192715103}
   clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
+  radius: 150
 --- !u!43 &202672432
 Mesh:
   m_ObjectHideFlags: 0
@@ -4524,18 +4525,18 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 438918258}
+  - component: {fileID: 438918263}
   - component: {fileID: 438918262}
   - component: {fileID: 438918261}
   - component: {fileID: 438918260}
   - component: {fileID: 438918259}
-  - component: {fileID: 438918263}
   m_Layer: 0
   m_Name: Orbit_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &438918258
 Transform:
   m_ObjectHideFlags: 0
@@ -9342,6 +9343,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 438918261}
   clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
+  radius: 400
 --- !u!1 &651107809
 GameObject:
   m_ObjectHideFlags: 0
@@ -9405,8 +9407,9 @@ MonoBehaviour:
   - {fileID: 836378051}
   - {fileID: 1720781035}
   - {fileID: 438918263}
-  activeOrbits: 7
+  activeOrbits: 5
   g: 1000
+  orbitalOffset: -2.5
 --- !u!114 &709022415 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3218494574914477874, guid: b286309a26cb52942b036ab412b23339, type: 3}
@@ -9427,18 +9430,18 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 818892034}
+  - component: {fileID: 818892039}
   - component: {fileID: 818892038}
   - component: {fileID: 818892037}
   - component: {fileID: 818892036}
   - component: {fileID: 818892035}
-  - component: {fileID: 818892039}
   m_Layer: 0
   m_Name: Orbit_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &818892034
 Transform:
   m_ObjectHideFlags: 0
@@ -13165,13 +13168,14 @@ MonoBehaviour:
   meshRenderer: {fileID: 818892037}
   clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
+  radius: 100
 --- !u!43 &824054307
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22028
+  m_Name: pb_Mesh22030
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13338,18 +13342,18 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 836378050}
+  - component: {fileID: 836378051}
   - component: {fileID: 836378049}
   - component: {fileID: 836378048}
   - component: {fileID: 836378047}
   - component: {fileID: 836378046}
-  - component: {fileID: 836378051}
   m_Layer: 0
   m_Name: Orbit_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &836378046
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17796,6 +17800,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 836378048}
   clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
+  radius: 300
 --- !u!114 &923961538 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3218494574914477874, guid: b286309a26cb52942b036ab412b23339, type: 3}
@@ -17816,18 +17821,18 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 957155808}
+  - component: {fileID: 957155813}
   - component: {fileID: 957155812}
   - component: {fileID: 957155811}
   - component: {fileID: 957155810}
   - component: {fileID: 957155809}
-  - component: {fileID: 957155813}
   m_Layer: 0
   m_Name: Orbit_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &957155808
 Transform:
   m_ObjectHideFlags: 0
@@ -21914,6 +21919,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 957155811}
   clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
+  radius: 200
 --- !u!1001 &1021513996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21968,6 +21974,10 @@ PrefabInstance:
     - target: {fileID: 2740946120236838229, guid: b286309a26cb52942b036ab412b23339, type: 3}
       propertyPath: m_Name
       value: Planet_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740946120236838229, guid: b286309a26cb52942b036ab412b23339, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b286309a26cb52942b036ab412b23339, type: 3}
@@ -22240,7 +22250,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22096
+  m_Name: pb_Mesh22098
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -22500,18 +22510,18 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1305920610}
+  - component: {fileID: 1305920611}
   - component: {fileID: 1305920609}
   - component: {fileID: 1305920608}
   - component: {fileID: 1305920607}
   - component: {fileID: 1305920606}
-  - component: {fileID: 1305920611}
   m_Layer: 0
   m_Name: Orbit_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1305920606
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -26778,6 +26788,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 1305920608}
   clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
+  radius: 250
 --- !u!1001 &1312851780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26832,6 +26843,10 @@ PrefabInstance:
     - target: {fileID: 2740946120236838229, guid: b286309a26cb52942b036ab412b23339, type: 3}
       propertyPath: m_Name
       value: Planet_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740946120236838229, guid: b286309a26cb52942b036ab412b23339, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b286309a26cb52942b036ab412b23339, type: 3}
@@ -26894,6 +26909,10 @@ PrefabInstance:
     - target: {fileID: 2740946120236838229, guid: b286309a26cb52942b036ab412b23339, type: 3}
       propertyPath: m_Name
       value: Planet_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740946120236838229, guid: b286309a26cb52942b036ab412b23339, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b286309a26cb52942b036ab412b23339, type: 3}
@@ -27168,6 +27187,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planet_1
       objectReference: {fileID: 0}
+    - target: {fileID: 2740946120236838229, guid: b286309a26cb52942b036ab412b23339, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b286309a26cb52942b036ab412b23339, type: 3}
 --- !u!4 &1426588150 stripped
@@ -27345,7 +27368,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 1661629699}
-  collider: {fileID: 0}
   meshRenderer: {fileID: 0}
 --- !u!43 &1667751201
 Mesh:
@@ -27693,6 +27715,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planet_4
       objectReference: {fileID: 0}
+    - target: {fileID: 2740946120236838229, guid: b286309a26cb52942b036ab412b23339, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b286309a26cb52942b036ab412b23339, type: 3}
 --- !u!4 &1697607147 stripped
@@ -27709,18 +27735,18 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1720781030}
+  - component: {fileID: 1720781035}
   - component: {fileID: 1720781034}
   - component: {fileID: 1720781033}
   - component: {fileID: 1720781032}
   - component: {fileID: 1720781031}
-  - component: {fileID: 1720781035}
   m_Layer: 0
   m_Name: Orbit_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1720781030
 Transform:
   m_ObjectHideFlags: 0
@@ -32347,6 +32373,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 1720781033}
   clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
+  radius: 350
 --- !u!43 &1755591952
 Mesh:
   m_ObjectHideFlags: 0
@@ -32614,6 +32641,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planet_2
       objectReference: {fileID: 0}
+    - target: {fileID: 2740946120236838229, guid: b286309a26cb52942b036ab412b23339, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b286309a26cb52942b036ab412b23339, type: 3}
 --- !u!4 &1885315849 stripped
@@ -32718,6 +32749,10 @@ PrefabInstance:
     - target: {fileID: 2740946120236838229, guid: b286309a26cb52942b036ab412b23339, type: 3}
       propertyPath: m_Name
       value: Planet_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740946120236838229, guid: b286309a26cb52942b036ab412b23339, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2740946120236838235, guid: b286309a26cb52942b036ab412b23339, type: 3}
       propertyPath: CanMove
