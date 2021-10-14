@@ -8,6 +8,9 @@ public class CelestialObjectData : MonoBehaviour
     [FoldoutGroup("Components"), SerializeField] protected MeshRenderer meshRenderer;
 
     [FoldoutGroup("Attributes"), SerializeField] protected CelestialAttributes attributes;
+
+    public bool IsDestroyed = false;
+
     public Rigidbody RigidBody { get 
         {
             if (rigidbody == null)
@@ -16,4 +19,13 @@ public class CelestialObjectData : MonoBehaviour
         } 
     }
     public CelestialAttributes Attributes { get { return attributes; } }
+
+    public void DestroyBody(bool _disableGameObject = true)
+    {
+        IsDestroyed = true;
+        if (_disableGameObject)
+            gameObject.SetActive(false);
+        else
+            Destroy(gameObject);
+    }
 }
