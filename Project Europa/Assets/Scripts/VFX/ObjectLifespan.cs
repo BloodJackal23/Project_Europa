@@ -15,7 +15,7 @@ public class ObjectLifespan : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void HaltDestruction()
+    public void PauseDestruction()
     {
         StopAllCoroutines();
     }

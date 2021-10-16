@@ -51,7 +51,7 @@ MonoBehaviour:
   tetherShotPrefab: {fileID: 4702861350433354552, guid: 7b52c1d09e7d8124784e87385a13df53, type: 3}
   shotSpeed: 100
   rpm: 50
-  tetherPullForce: 5
+  tetherPullForce: 165
   tetherLength: 30
 --- !u!54 &1029277542004201082
 Rigidbody:
@@ -97,7 +97,7 @@ HingeJoint:
     min: 0
     max: 0
     bounciness: 0
-    bounceMinVelocity: 0.2
+    bounceMinVelocity: 0
     contactDistance: 0
   m_BreakForce: Infinity
   m_BreakTorque: Infinity

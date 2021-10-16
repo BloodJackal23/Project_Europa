@@ -3,29 +3,22 @@ using Sirenix.OdinInspector;
 
 public class TetherShot : MonoBehaviour
 {
-    public delegate void OnHit(Rigidbody _target);
-    public OnHit onHit;
-
     [FoldoutGroup("Attributes"), SerializeField] private LayerMask targetMask;
 
-    private PlanetaryMovement tetherTarget;
+    private PlanetData tetherTarget;
+
+    public delegate void OnHit(Rigidbody _target, TetherShot _shot);
+    public OnHit onHit;
+    public delegate void OnDetach();
+    public OnDetach onDetach;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(targetMask == (targetMask | (1 << other.gameObject.layer)))
+        if(tetherTarget == null && targetMask == (targetMask | (1 << other.gameObject.layer)))
         {
             if(other.tag == "Planet")
             {
-                GetComponent<Rigidbody>().velocity *= 0;
-                GetComponent<ObjectLifespan>().HaltDestruction();
-                transform.position = other.transform.position;
-                FixedJoint targetJoint = gameObject.AddComponent<FixedJoint>();
-                targetJoint.connectedBody = other.attachedRigidbody;
-                tetherTarget = other.GetComponent<PlanetaryMovement>();
-                tetherTarget.SetTethered(true);
-                tetherTarget.onDetached += DestroyOnDetachment;
-                tetherTarget.StopPlanetaryOrbit();
-                onHit?.Invoke(other.attachedRigidbody);
+                OnTargetHit(other);
             }
         }
     }
@@ -33,12 +26,26 @@ public class TetherShot : MonoBehaviour
     private void OnDisable()
     {
         onHit = null;
+        onDetach = null;
     }
 
-    private void DestroyOnDetachment()
+    private void OnTargetHit(Collider _targetCol)
     {
-        tetherTarget.SetTethered(false);
-        tetherTarget.onDetached -= DestroyOnDetachment;
+        GetComponent<Rigidbody>().velocity *= 0;
+        GetComponent<ObjectLifespan>().PauseDestruction();
+        transform.position = _targetCol.transform.position;
+        gameObject.AddComponent<FixedJoint>().connectedBody = _targetCol.attachedRigidbody;
+        tetherTarget = _targetCol.GetComponent<PlanetData>();
+        tetherTarget.SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Tethered);
+        onHit?.Invoke(_targetCol.attachedRigidbody, this); tetherTarget = _targetCol.GetComponent<PlanetData>();
+    }
+
+    public void DisconnectTether()
+    {
+        Debug.Log("Tether shot disconnected!");
+        onDetach?.Invoke();
+        if (tetherTarget.ObjectStaus == CelestialObjectData.CelestialObjectStaus.Tethered)
+            tetherTarget.SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Drifting);
         Destroy(gameObject);
     }
 }

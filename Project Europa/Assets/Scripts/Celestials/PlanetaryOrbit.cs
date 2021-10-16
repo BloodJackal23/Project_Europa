@@ -9,22 +9,18 @@ public class PlanetaryOrbit : MonoBehaviour
     [FoldoutGroup("Attributes"), SerializeField] private Material dangerMat;
     [FoldoutGroup("Attributes"), SerializeField, Range(0f, 900f)] private float radius;
 
-    private CelestialObjectData orbitingPlanet;
+    private PlanetData orbitingPlanet;
     private Collider planetCollider;
     private PlanetaryMovement planetaryMovement;
     //private PlanetRandomizer randomizer;
-    public CelestialObjectData OrbitingPlanet { get { return orbitingPlanet; } }
+    public PlanetData OrbitingPlanet { get { return orbitingPlanet; } }
     public float Radius { get { return radius; } }
 
-    public void SetPlanet(CelestialObjectData _planet)
+    public void SetPlanet(PlanetData _planet)
     {
         orbitingPlanet = _planet;
         planetCollider = orbitingPlanet.GetComponent<Collider>();
         planetaryMovement = orbitingPlanet.GetComponent<PlanetaryMovement>();
-        if (planetaryMovement.IsTethered)
-        {
-            planetaryMovement.onDetached?.Invoke();
-        }
         planetaryMovement.StartPlanetaryOrbit();
     }
 
@@ -32,8 +28,7 @@ public class PlanetaryOrbit : MonoBehaviour
     {
         if(orbitingPlanet == null && other.gameObject.tag == "Planet")
         {
-            orbitingPlanet = other.GetComponent<CelestialObjectData>();
-            SetPlanet(orbitingPlanet);        
+            SetPlanet(other.GetComponent<PlanetData>());        
             meshRenderer.material = clearMat;
             //StartCoroutine(RunDisturbance());
         }
@@ -43,13 +38,14 @@ public class PlanetaryOrbit : MonoBehaviour
     {
         if(other == planetCollider)
         {
-            planetaryMovement.StopPlanetaryOrbit();
+            if (orbitingPlanet.ObjectStaus != CelestialObjectData.CelestialObjectStaus.Tethered)
+                orbitingPlanet.SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Drifting);
             meshRenderer.material = dangerMat;
             orbitingPlanet = null;
             planetCollider = null;
             planetaryMovement = null;
             //randomizer = null;
-            StopAllCoroutines();
+            //StopAllCoroutines();
         }
     }
 

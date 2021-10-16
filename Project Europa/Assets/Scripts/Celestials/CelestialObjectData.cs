@@ -9,8 +9,10 @@ public class CelestialObjectData : MonoBehaviour
 
     [FoldoutGroup("Attributes"), SerializeField] protected CelestialAttributes attributes;
 
-    public bool IsDestroyed = false;
+    [FoldoutGroup("Read Only"), SerializeField, ReadOnly] protected CelestialObjectStaus objectStaus;
 
+    public enum CelestialObjectStaus {Stationary, Orbiting, Drifting, Tethered, Destroyed}
+    public CelestialObjectStaus ObjectStaus { get { return objectStaus; } }
     public Rigidbody RigidBody { get 
         {
             if (rigidbody == null)
@@ -20,12 +22,8 @@ public class CelestialObjectData : MonoBehaviour
     }
     public CelestialAttributes Attributes { get { return attributes; } }
 
-    public void DestroyBody(bool _disableGameObject = true)
+    public virtual void SetObjectStatus(CelestialObjectStaus _newStatus)
     {
-        IsDestroyed = true;
-        if (_disableGameObject)
-            gameObject.SetActive(false);
-        else
-            Destroy(gameObject);
+        objectStaus = _newStatus;
     }
 }

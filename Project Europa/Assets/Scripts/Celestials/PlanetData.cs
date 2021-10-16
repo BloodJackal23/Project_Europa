@@ -5,9 +5,30 @@ using Procedural;
 public class PlanetData : CelestialObjectData
 {
     [FoldoutGroup("Components"), SerializeField] private ProceduralPlanetLibrary planetLibrary;
+    [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private bool clockwiseOrbit;
 
+    public delegate void OnOrbitStart();
+    public OnOrbitStart onOrbitStart;
+
+    public delegate void OnOrbitEnd();
+    public OnOrbitEnd onOrbitEnd;
+
+    public delegate void OnDriftStart();
+    public OnDriftStart onDriftStart;
+
+    public delegate void OnDriftEnd();
+    public OnDriftEnd onDriftEnd;
+
+    public delegate void OnTetherStart();
+    public OnTetherStart onTetherStart;
+
+    public delegate void OnTetherEnd();
+    public OnTetherEnd onTetherEnd;
+
+    public delegate void OnDestroyed();
+    public OnDestroyed onDestroyed;
     public ProceduralPlanetLibrary PlanetLibrary { get { return planetLibrary; } }
-    public bool ClockwiseOrbit { get; private set; }
+    public bool ClockwiseOrbit { get { return clockwiseOrbit; } }
 
     private void Awake()
     {
@@ -18,9 +39,9 @@ public class PlanetData : CelestialObjectData
     private void InitializeProceduralData()
     {
         attributes = CelestialProceduralGenerator.RandomizedAttributes(planetLibrary);
-        ClockwiseOrbit = true;
+        clockwiseOrbit = true;
         if (Random.Range(0, 2) > 0)
-            ClockwiseOrbit = false;
+            clockwiseOrbit = false;
     }
 
     private void SetComponentsValues()
@@ -28,5 +49,37 @@ public class PlanetData : CelestialObjectData
         rigidbody.mass = attributes.Mass;
         transform.localScale *= attributes.Scale;
         meshRenderer.material = attributes.ObjectMaterial;
+    }
+
+    public override void SetObjectStatus(CelestialObjectStaus _newStatus)
+    {
+        //switch (objectStaus)
+        //{
+        //    case CelestialObjectStaus.Orbiting:
+        //        onOrbitEnd?.Invoke();
+        //        break;
+        //    case CelestialObjectStaus.Drifting:
+        //        onDriftEnd?.Invoke();
+        //        break;
+        //    case CelestialObjectStaus.Tethered:
+        //        onTetherEnd?.Invoke();
+        //        break;
+        //}
+        base.SetObjectStatus(_newStatus);
+        switch (objectStaus)
+        {
+            case CelestialObjectStaus.Orbiting:
+                onOrbitStart?.Invoke();
+                break;
+            case CelestialObjectStaus.Drifting:
+                onDriftStart?.Invoke();
+                break;
+            case CelestialObjectStaus.Tethered:
+                onTetherStart?.Invoke();
+                break;
+            case CelestialObjectStaus.Destroyed:
+                onDestroyed?.Invoke();
+                break;
+        }
     }
 }
