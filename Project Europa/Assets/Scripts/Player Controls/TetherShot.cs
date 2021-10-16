@@ -36,8 +36,18 @@ public class TetherShot : MonoBehaviour
         transform.position = _targetCol.transform.position;
         gameObject.AddComponent<FixedJoint>().connectedBody = _targetCol.attachedRigidbody;
         tetherTarget = _targetCol.GetComponent<PlanetData>();
+        tetherTarget.stateEnd += DisconnectOnReturnToOrbit;
         tetherTarget.SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Tethered);
         onHit?.Invoke(_targetCol.attachedRigidbody, this); tetherTarget = _targetCol.GetComponent<PlanetData>();
+    }
+
+    private void DisconnectOnReturnToOrbit(PlanetData.CelestialObjectStaus _staus)
+    {
+        if (_staus == CelestialObjectData.CelestialObjectStaus.Tethered)
+        {
+            onDetach?.Invoke();
+            Destroy(gameObject);
+        }  
     }
 
     public void DisconnectTether()

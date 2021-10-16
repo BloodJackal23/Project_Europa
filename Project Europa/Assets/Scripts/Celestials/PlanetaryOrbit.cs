@@ -21,7 +21,7 @@ public class PlanetaryOrbit : MonoBehaviour
         orbitingPlanet = _planet;
         planetCollider = orbitingPlanet.GetComponent<Collider>();
         planetaryMovement = orbitingPlanet.GetComponent<PlanetaryMovement>();
-        planetaryMovement.StartPlanetaryOrbit();
+        orbitingPlanet.SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Orbiting);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -26,7 +26,7 @@ public class SolarSystemGenerator : Singleton<SolarSystemGenerator>
         InitializeOrbits();
     }
 
-    public void InitializeOrbits()
+    private void InitializeOrbits()
     {
         if(activeOrbits < 7)
         {
@@ -35,9 +35,7 @@ public class SolarSystemGenerator : Singleton<SolarSystemGenerator>
             {
                 int rand = 0;
                 do
-                {
                     rand = Random.Range(0, activeOrbits);
-                }
                 while (selectedOrbits.Contains(orbits[rand]));
                 AssignPlanetToOrbit(orbits[rand], planets[rand]);
                 selectedOrbits.Add(orbits[rand]);
@@ -46,9 +44,7 @@ public class SolarSystemGenerator : Singleton<SolarSystemGenerator>
         else
         {
             for(int i = 0; i < orbits.Length; i++)
-            {
                 AssignPlanetToOrbit(orbits[i], planets[i]);
-            }
         }
     }
 
@@ -58,6 +54,6 @@ public class SolarSystemGenerator : Singleton<SolarSystemGenerator>
         _planet.gameObject.SetActive(true);
         _orbit.gameObject.SetActive(true);
         _planet.transform.position = new Vector3(randomLocationOnOrbit.x, _planet.transform.position.y, randomLocationOnOrbit.y);
-        _orbit.SetPlanet(_planet);
+        //_orbit.SetPlanet(_planet);
     }
 }
