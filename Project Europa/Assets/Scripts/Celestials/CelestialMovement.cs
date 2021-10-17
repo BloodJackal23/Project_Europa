@@ -12,6 +12,11 @@ public class CelestialMovement : MonoBehaviour
             celestialData = GetComponent<CelestialObjectData>();
     }
 
+    virtual protected void FixedUpdate()
+    {
+
+    }
+
     public float GetGravitationalForce(CelestialObjectData _target)
     {
         if (_target == this)

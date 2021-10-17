@@ -50,10 +50,10 @@ public class SolarSystemGenerator : Singleton<SolarSystemGenerator>
 
     private void AssignPlanetToOrbit(PlanetaryOrbit _orbit, PlanetData _planet)
     {
-        Vector2 randomLocationOnOrbit = Random.insideUnitCircle.normalized * (_orbit.Radius + orbitalOffset);
+        Vector2 randomLocationOnOrbit = Random.insideUnitCircle.normalized * (_orbit.OuterRadius + orbitalOffset);
         _planet.gameObject.SetActive(true);
         _orbit.gameObject.SetActive(true);
         _planet.transform.position = new Vector3(randomLocationOnOrbit.x, _planet.transform.position.y, randomLocationOnOrbit.y);
-        //_orbit.SetPlanet(_planet);
+        _orbit.SetOrbitingPlanet(_planet);
     }
 }

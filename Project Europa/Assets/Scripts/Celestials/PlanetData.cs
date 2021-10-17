@@ -7,14 +7,14 @@ public class PlanetData : CelestialObjectData
     [FoldoutGroup("Components"), SerializeField] private ProceduralPlanetLibrary planetLibrary;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private bool clockwiseOrbit;
 
-    public delegate void OnStateStart(CelestialObjectStaus _objectStaus);
-    public OnStateStart stateStart;
+    //public delegate void OnStateStart(CelestialObjectStaus _objectStaus);
+    //public OnStateStart stateStart;
 
-    public delegate void OnStateEnd(CelestialObjectStaus _objectStaus);
-    public OnStateEnd stateEnd;
+    //public delegate void OnStateEnd(CelestialObjectStaus _objectStaus);
+    //public OnStateEnd stateEnd;
 
-    //public delegate void OnOrbitStart();
-    //public OnOrbitStart onOrbitStart;
+    public delegate void OnOrbitEnter();
+    public OnOrbitEnter onOrbitEnter;
 
     //public delegate void OnOrbitEnd();
     //public OnOrbitEnd onOrbitEnd;
@@ -31,8 +31,8 @@ public class PlanetData : CelestialObjectData
     //public delegate void OnTetherEnd();
     //public OnTetherEnd onTetherEnd;
 
-    //public delegate void OnDestroyed();
-    //public OnDestroyed onDestroyed;
+    public delegate void OnDestroyed();
+    public OnDestroyed onDestroyed;
     public ProceduralPlanetLibrary PlanetLibrary { get { return planetLibrary; } }
     public bool ClockwiseOrbit { get { return clockwiseOrbit; } }
 
@@ -40,20 +40,20 @@ public class PlanetData : CelestialObjectData
     {
         InitializeProceduralData();
         SetComponentsValues();
-        //onDestroyed += OnPlanetDestroyed;
+        onDestroyed += DestroyPlanet;
     }
 
     private void OnDisable()
     {
-        stateStart = null;
-        stateEnd = null;
-        //onOrbitStart = null;
+        //stateStart = null;
+        //stateEnd = null;
+        onOrbitEnter = null;
         //onOrbitEnd = null;
         //onDriftStart = null;
         //onDriftEnd = null;
         //onTetherStart = null;
         //onTetherEnd = null;
-        //onDestroyed = null;
+        onDestroyed = null;
     }
 
     private void InitializeProceduralData()
@@ -74,9 +74,9 @@ public class PlanetData : CelestialObjectData
     {
         if(objectStaus != _newStatus)
         {
-            stateEnd?.Invoke(objectStaus);
+            //stateEnd?.Invoke(objectStaus);
             base.SetObjectStatus(_newStatus);
-            stateStart?.Invoke(objectStaus);
+            //stateStart?.Invoke(objectStaus);
         } 
     }
     //public override void SetObjectStatus(CelestialObjectStaus _newStatus)
@@ -114,7 +114,7 @@ public class PlanetData : CelestialObjectData
     //    }
     //}
 
-    public void DestroyPlanet()
+    private void DestroyPlanet()
     {
         gameObject.SetActive(false);
     }
