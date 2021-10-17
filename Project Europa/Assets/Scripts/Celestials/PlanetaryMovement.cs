@@ -1,9 +1,9 @@
 using UnityEngine;
-using System.Collections;
 using Sirenix.OdinInspector;
 
 public class PlanetaryMovement : CelestialMovement
 {
+    [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private float innerRadius;
     private PlanetData planetData;
 
     override protected void Awake()

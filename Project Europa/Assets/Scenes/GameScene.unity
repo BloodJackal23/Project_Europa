@@ -4119,7 +4119,7 @@ MonoBehaviour:
   clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
   outerRadius: 150
-  orbitThickness: 6
+  orbitThickness: 10
 --- !u!43 &202672432
 Mesh:
   m_ObjectHideFlags: 0
@@ -9315,7 +9315,7 @@ MonoBehaviour:
   clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
   outerRadius: 400
-  orbitThickness: 6
+  orbitThickness: 10
 --- !u!1 &517770367
 GameObject:
   m_ObjectHideFlags: 0
@@ -9489,7 +9489,7 @@ MonoBehaviour:
   - {fileID: 438918263}
   activeOrbits: 7
   g: 100000
-  orbitalOffset: -2.5
+  orbitalOffset: -5
 --- !u!1 &668472720
 GameObject:
   m_ObjectHideFlags: 0
@@ -13349,7 +13349,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22088
+  m_Name: pb_Mesh22078
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17960,7 +17960,7 @@ MonoBehaviour:
   clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
   outerRadius: 300
-  orbitThickness: 6
+  orbitThickness: 10
 --- !u!1 &836635290
 GameObject:
   m_ObjectHideFlags: 0
@@ -22173,7 +22173,7 @@ MonoBehaviour:
   clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
   outerRadius: 200
-  orbitThickness: 6
+  orbitThickness: 10
 --- !u!1001 &1021513996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22354,7 +22354,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh21944
+  m_Name: pb_Mesh21942
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -22646,7 +22646,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22158
+  m_Name: pb_Mesh22146
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27170,7 +27170,7 @@ MonoBehaviour:
   clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
   outerRadius: 250
-  orbitThickness: 6
+  orbitThickness: 10
 --- !u!1001 &1312851780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27351,7 +27351,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh21990
+  m_Name: pb_Mesh21986
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27771,7 +27771,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22034
+  m_Name: pb_Mesh22026
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -32755,14 +32755,14 @@ MonoBehaviour:
   clearMat: {fileID: 2100000, guid: 68873899acec4e54ea4974051a736575, type: 2}
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
   outerRadius: 350
-  orbitThickness: 6
+  orbitThickness: 10
 --- !u!43 &1755591952
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22006
+  m_Name: pb_Mesh22000
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

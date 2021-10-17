@@ -12,6 +12,7 @@ public class PlanetaryOrbit : MonoBehaviour
 
     private PlanetData orbitingPlanet;
     private float innerRadius;
+    private bool addedOrbitalVelocity;
     //private PlanetRandomizer randomizer;
     public PlanetData OrbitingPlanet { get { return orbitingPlanet; } }
     public float OuterRadius { get { return outerRadius; } }
@@ -29,19 +30,28 @@ public class PlanetaryOrbit : MonoBehaviour
             float sqrMag = Vector3.SqrMagnitude(orbitingPlanet.transform.position - SolarSystemGenerator.Instance.transform.position);
             if(sqrMag < outerRadius * outerRadius && sqrMag > innerRadius * innerRadius)
             {
-                Debug.Log("Planet: " + orbitingPlanet.gameObject.name + " is in orbit!");
-                orbitingPlanet.SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Orbiting);
-                orbitingPlanet.RigidBody.velocity *= 0;
-                orbitingPlanet.onOrbitEnter?.Invoke();
+                if(orbitingPlanet.ObjectStaus != CelestialObjectData.CelestialObjectStaus.Tethered)
+                {
+                    Debug.Log("Planet: " + orbitingPlanet.gameObject.name + " is in orbit!");
+
+                    if (!addedOrbitalVelocity)
+                    {
+                        orbitingPlanet.SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Orbiting);
+                        orbitingPlanet.RigidBody.velocity *= 0;
+                        orbitingPlanet.onOrbitEnter?.Invoke();
+                        addedOrbitalVelocity = true;
+                    }
+                }
                 meshRenderer.material = clearMat;
                 //StartCoroutine(RunDisturbance());
             }
             else
             {
                 Debug.Log("Planet: " + orbitingPlanet.gameObject.name + " is out of orbit!");
-                if (orbitingPlanet.ObjectStaus != CelestialObjectData.CelestialObjectStaus.Tethered)
+                if(orbitingPlanet.ObjectStaus != CelestialObjectData.CelestialObjectStaus.Tethered)
                     orbitingPlanet.SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Drifting);
                 meshRenderer.material = dangerMat;
+                addedOrbitalVelocity = false;
             }
         } 
     }
