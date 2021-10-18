@@ -1,6 +1,5 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
-using System.Collections;
 
 public class PlanetaryOrbit : MonoBehaviour
 {
@@ -9,12 +8,19 @@ public class PlanetaryOrbit : MonoBehaviour
     [FoldoutGroup("Attributes"), SerializeField] private Material dangerMat;
     [FoldoutGroup("Attributes"), SerializeField, Range(0f, 900f)] private float outerRadius;
     [FoldoutGroup("Attributes"), SerializeField, Range(1f, 20f)] private float orbitThickness;
+    [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private float innerRadius;
 
     private PlanetData orbitingPlanet;
-    private float innerRadius;
-    private bool addedOrbitalVelocity;
+
+    public delegate void OnOrbitEnter();
+    public OnOrbitEnter onOrbitEnter;
+
+    public delegate void OnOrbitExit();
+    public OnOrbitExit onOrbitExit;
+
     public PlanetData OrbitingPlanet { get { return orbitingPlanet; } }
     public float OuterRadius { get { return outerRadius; } }
+    public float InnerRadius { get { return innerRadius; } }
     public float OrbitThickness { get { return orbitThickness; } }
 
     private void Awake()
@@ -22,41 +28,26 @@ public class PlanetaryOrbit : MonoBehaviour
         innerRadius = Mathf.Max(0, outerRadius - orbitThickness);
     }
 
-    private void FixedUpdate()
+    private void OnEnable()
     {
-        if(orbitingPlanet != null && orbitingPlanet.ObjectStaus != CelestialObjectData.CelestialObjectStaus.Destroyed)
-        {
-            float sqrMag = Vector3.SqrMagnitude(orbitingPlanet.transform.position - SolarSystemGenerator.Instance.transform.position);
-            if(sqrMag < outerRadius * outerRadius && sqrMag > innerRadius * innerRadius)
-            {
-                if(orbitingPlanet.ObjectStaus != CelestialObjectData.CelestialObjectStaus.Tethered)
-                {
-                    Debug.Log("Planet: " + orbitingPlanet.gameObject.name + " is in orbit!");
-
-                    if (!addedOrbitalVelocity)
-                    {
-                        orbitingPlanet.SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Orbiting);
-                        orbitingPlanet.RigidBody.velocity *= 0;
-                        orbitingPlanet.onOrbitEnter?.Invoke();
-                        addedOrbitalVelocity = true;
-                    }
-                }
-                meshRenderer.material = clearMat;
-            }
-            else
-            {
-                Debug.Log("Planet: " + orbitingPlanet.gameObject.name + " is out of orbit!");
-                if(orbitingPlanet.ObjectStaus != CelestialObjectData.CelestialObjectStaus.Tethered)
-                    orbitingPlanet.SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Drifting);
-                meshRenderer.material = dangerMat;
-                addedOrbitalVelocity = false;
-            }
-        } 
+        onOrbitEnter += SetMaterialToClear;
+        onOrbitExit += SetMaterialToDanger;
     }
 
-    public void SetOrbitingPlanet(PlanetData _targetPlanet)
+    private void OnDisable()
     {
-        orbitingPlanet = _targetPlanet;
+        onOrbitEnter -= SetMaterialToClear;
+        onOrbitExit -= SetMaterialToDanger;
+    }
+
+    private void SetMaterialToClear()
+    {
+        meshRenderer.material = clearMat;
+    }
+
+    private void SetMaterialToDanger()
+    {
+        meshRenderer.material = dangerMat;
     }
 
     private void OnDrawGizmosSelected()

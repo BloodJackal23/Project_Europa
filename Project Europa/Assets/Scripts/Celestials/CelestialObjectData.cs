@@ -8,7 +8,7 @@ public class CelestialObjectData : MonoBehaviour
     [FoldoutGroup("Components"), SerializeField] protected MeshRenderer meshRenderer;
 
     [FoldoutGroup("Attributes"), SerializeField] protected CelestialAttributes attributes;
-
+    [FoldoutGroup("Attributes"), SerializeField] protected CelestialObjectStaus initialStatus = CelestialObjectStaus.Stationary;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] protected CelestialObjectStaus objectStaus;
 
     public enum CelestialObjectStaus {Stationary, Orbiting, Drifting, Tethered, Destroyed}
@@ -21,6 +21,11 @@ public class CelestialObjectData : MonoBehaviour
         } 
     }
     public CelestialAttributes Attributes { get { return attributes; } }
+
+    virtual protected void Awake()
+    {
+        objectStaus = initialStatus;
+    }
 
     public virtual void SetObjectStatus(CelestialObjectStaus _newStatus)
     {

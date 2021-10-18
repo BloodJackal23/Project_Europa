@@ -54,6 +54,6 @@ public class SolarSystemGenerator : Singleton<SolarSystemGenerator>
         _planet.gameObject.SetActive(true);
         _orbit.gameObject.SetActive(true);
         _planet.transform.position = new Vector3(randomLocationOnOrbit.x, _planet.transform.position.y, randomLocationOnOrbit.y);
-        _orbit.SetOrbitingPlanet(_planet);
+        _planet.SetOrbit(_orbit);
     }
 }

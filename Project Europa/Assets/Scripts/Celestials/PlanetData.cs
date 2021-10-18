@@ -5,18 +5,21 @@ using Procedural;
 public class PlanetData : CelestialObjectData
 {
     [FoldoutGroup("Components"), SerializeField] private ProceduralPlanetLibrary planetLibrary;
+    [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private PlanetaryOrbit orbit;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private bool clockwiseOrbit;
 
-    public delegate void OnOrbitEnter();
-    public OnOrbitEnter onOrbitEnter;
+    //public delegate void OnOrbitEnter();
+    //public OnOrbitEnter onOrbitEnter;
 
     public delegate void OnDestroyed();
     public OnDestroyed onDestroyed;
     public ProceduralPlanetLibrary PlanetLibrary { get { return planetLibrary; } }
+    public PlanetaryOrbit Orbit { get { return orbit; } }
     public bool ClockwiseOrbit { get { return clockwiseOrbit; } }
 
-    private void Awake()
+    override protected void Awake()
     {
+        base.Awake();
         InitializeProceduralData();
         SetComponentsValues();
         onDestroyed += DestroyPlanet;
@@ -24,7 +27,7 @@ public class PlanetData : CelestialObjectData
 
     private void OnDisable()
     {
-        onOrbitEnter = null;
+        //onOrbitEnter = null;
         onDestroyed = null;
     }
 
@@ -49,6 +52,12 @@ public class PlanetData : CelestialObjectData
             base.SetObjectStatus(_newStatus);
         } 
     }
+
+    public void SetOrbit(PlanetaryOrbit _orbit)
+    {
+        orbit = _orbit;
+    }
+
     private void DestroyPlanet()
     {
         gameObject.SetActive(false);
