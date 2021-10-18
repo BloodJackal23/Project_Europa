@@ -37,7 +37,6 @@ public class TetherShot : MonoBehaviour
         gameObject.AddComponent<FixedJoint>().connectedBody = _targetCol.attachedRigidbody;
         tetherTarget = _targetCol.GetComponent<PlanetData>();
         tetherTarget.onOrbitEnter += DisconnectOnReturnToOrbit; 
-        //tetherTarget.stateEnd += DisconnectOnReturnToOrbit;
         tetherTarget.SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Tethered);
         onHit?.Invoke(_targetCol.attachedRigidbody, this); tetherTarget = _targetCol.GetComponent<PlanetData>();
     }

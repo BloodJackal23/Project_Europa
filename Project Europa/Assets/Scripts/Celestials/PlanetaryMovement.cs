@@ -10,10 +10,7 @@ public class PlanetaryMovement : CelestialMovement
     {
         base.Awake();
         planetData = (PlanetData)celestialData;
-        //planetData.stateStart += SetPlanetMovementState;
         planetData.onOrbitEnter += AddInitialOrbitVelocityToStar;
-        //planetData.onTetherStart += TetherPlanet;
-        //planetData.onTetherEnd += AddStarGravity;
     }
 
     protected override void FixedUpdate()
@@ -49,65 +46,4 @@ public class PlanetaryMovement : CelestialMovement
     {
         AddPlanetInitialForce(SolarSystemGenerator.Instance.Star);
     }
-
-    //public void StartPlanetaryOrbit()
-    //{
-    //    if (planetData.ObjectStaus != CelestialObjectData.CelestialObjectStaus.Orbiting)
-    //    {
-    //        if(planetData.ObjectStaus == CelestialObjectData.CelestialObjectStaus.Tethered)
-    //            AddStarGravity();
-    //        planetData.SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Orbiting);
-    //        AddInitialOrbitVelocityToStar();
-    //    }
-    //}
-
-    //private void SetPlanetMovementState(CelestialObjectData.CelestialObjectStaus _staus)
-    //{
-    //    StopAllCoroutines();
-    //    switch (_staus)
-    //    {
-    //        case CelestialObjectData.CelestialObjectStaus.Drifting:
-    //            AddStarGravity();
-    //            break;
-    //        case CelestialObjectData.CelestialObjectStaus.Orbiting:
-    //            AddInitialOrbitVelocityToStar();
-    //            AddStarGravity();
-    //            break;
-    //        case CelestialObjectData.CelestialObjectStaus.Destroyed:
-    //            planetData.RigidBody.velocity *= 0;
-    //            planetData.DestroyPlanet();
-    //            break;
-    //    }
-    //}
-
-    //private IEnumerator StartOrbitalMovement()
-    //{
-    //    planetData.RigidBody.velocity *= 0;
-    //    CelestialObjectData starData = SolarSystemGenerator.Instance.Star;
-    //    AddPlanetInitialForce(starData);
-    //    while (planetData.ObjectStaus != CelestialObjectData.CelestialObjectStaus.Tethered || planetData.ObjectStaus != CelestialObjectData.CelestialObjectStaus.Destroyed)
-    //    {
-    //        planetData.RigidBody.AddForce((starData.transform.position - transform.position).normalized * GetGravitationalForce(starData));
-    //        yield return new WaitForFixedUpdate();
-    //    }
-    //}
-
-    //private IEnumerator StartGravitationalForce(CelestialObjectData _targetObject)
-    //{
-    //    while (planetData.ObjectStaus != CelestialObjectData.CelestialObjectStaus.Tethered || planetData.ObjectStaus != CelestialObjectData.CelestialObjectStaus.Destroyed)
-    //    {
-    //        planetData.RigidBody.AddForce((_targetObject.transform.position - transform.position).normalized * GetGravitationalForce(_targetObject));
-    //        yield return new WaitForFixedUpdate();
-    //    }
-    //}
-
-    //private void AddStarGravity()
-    //{
-    //    StartCoroutine(StartGravitationalForce(SolarSystemGenerator.Instance.Star));
-    //}
-
-    //public void SetTethered(bool _tethered)
-    //{
-    //    IsTethered = _tethered;
-    //}
 }

@@ -13,7 +13,6 @@ public class PlanetaryOrbit : MonoBehaviour
     private PlanetData orbitingPlanet;
     private float innerRadius;
     private bool addedOrbitalVelocity;
-    //private PlanetRandomizer randomizer;
     public PlanetData OrbitingPlanet { get { return orbitingPlanet; } }
     public float OuterRadius { get { return outerRadius; } }
     public float OrbitThickness { get { return orbitThickness; } }
@@ -43,7 +42,6 @@ public class PlanetaryOrbit : MonoBehaviour
                     }
                 }
                 meshRenderer.material = clearMat;
-                //StartCoroutine(RunDisturbance());
             }
             else
             {
@@ -68,53 +66,4 @@ public class PlanetaryOrbit : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(Vector3.zero, outerRadius);
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.TryGetComponent(out PlanetData planet))
-    //    {
-    //        Debug.Log("Planet: " + other.gameObject.name + " is in orbit!");
-    //        if (orbitingPlanet == null)
-    //            orbitingPlanet = planet;
-
-    //        if (planet == orbitingPlanet)
-    //        {
-    //            orbitingPlanet.SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Orbiting);
-    //            orbitingPlanet.RigidBody.velocity *= 0;
-    //            orbitingPlanet.onOrbitEnter?.Invoke();
-    //            meshRenderer.material = clearMat;
-    //            //StartCoroutine(RunDisturbance());
-    //        }
-    //    }
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if(other.TryGetComponent(out PlanetData planet))
-    //    {
-    //        Debug.Log("Planet: " + other.gameObject.name + " is out of orbit!");
-    //        if (planet == orbitingPlanet)
-    //        {
-
-    //            if (orbitingPlanet.ObjectStaus != CelestialObjectData.CelestialObjectStaus.Tethered)
-    //                orbitingPlanet.SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Drifting);
-    //            meshRenderer.material = dangerMat;
-    //            //randomizer = null;
-    //            //StopAllCoroutines();
-    //        }
-    //    }
-    //}
-
-    //private IEnumerator RunDisturbance()
-    //{
-    //    while (planetaryMovement.IsOrbiting)
-    //    {
-    //        yield return new WaitForSeconds(randomizer.DisturbanceInterval);
-    //        float rand = Random.Range(0f, 1f);
-    //        if (rand < randomizer.DisturbanceChance)
-    //        {
-    //            orbitingPlanet.RigidBody.AddForce(Random.insideUnitSphere * Random.Range(randomizer.MinDisturbanceForce, randomizer.MaxDisturbanceForce), ForceMode.Impulse);
-    //        }
-    //    }
-    //}
 }
