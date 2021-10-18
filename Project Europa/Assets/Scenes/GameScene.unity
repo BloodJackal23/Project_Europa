@@ -4120,6 +4120,7 @@ MonoBehaviour:
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
   outerRadius: 150
   orbitThickness: 10
+  innerRadius: 0
 --- !u!43 &202672432
 Mesh:
   m_ObjectHideFlags: 0
@@ -4308,7 +4309,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 308501574}
-  m_LocalRotation: {x: 0.12218327, y: -0.000000017077465, z: 0.0000000021023319, w: 0.9925076}
+  m_LocalRotation: {x: 0.12218325, y: 0.000000017077465, z: -0.0000000021023316, w: 0.9925076}
   m_LocalPosition: {x: 168.8, y: 25, z: -47.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4429,7 +4430,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340538954}
-  m_LocalRotation: {x: 0.12218327, y: -0.000000017077465, z: 0.0000000021023319, w: 0.9925076}
+  m_LocalRotation: {x: 0.12218325, y: 0.000000017077465, z: -0.0000000021023316, w: 0.9925076}
   m_LocalPosition: {x: 168.8, y: 25, z: -47.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -9316,6 +9317,7 @@ MonoBehaviour:
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
   outerRadius: 400
   orbitThickness: 10
+  innerRadius: 0
 --- !u!1 &517770367
 GameObject:
   m_ObjectHideFlags: 0
@@ -13343,6 +13345,7 @@ MonoBehaviour:
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
   outerRadius: 100
   orbitThickness: 10
+  innerRadius: 0
 --- !u!43 &824054307
 Mesh:
   m_ObjectHideFlags: 0
@@ -17961,6 +17964,7 @@ MonoBehaviour:
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
   outerRadius: 300
   orbitThickness: 10
+  innerRadius: 0
 --- !u!1 &836635290
 GameObject:
   m_ObjectHideFlags: 0
@@ -22174,6 +22178,7 @@ MonoBehaviour:
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
   outerRadius: 200
   orbitThickness: 10
+  innerRadius: 0
 --- !u!1001 &1021513996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27171,6 +27176,7 @@ MonoBehaviour:
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
   outerRadius: 250
   orbitThickness: 10
+  innerRadius: 0
 --- !u!1001 &1312851780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27752,6 +27758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 1661629699}
   meshRenderer: {fileID: 1661629696}
+  initialStatus: 0
   objectStaus: 0
 --- !u!114 &1661629701
 MonoBehaviour:
@@ -27945,7 +27952,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1673064722
 Transform:
   m_ObjectHideFlags: 0
@@ -32756,6 +32763,7 @@ MonoBehaviour:
   dangerMat: {fileID: 2100000, guid: f5add571a6cf85f439fd10dbe95d927b, type: 2}
   outerRadius: 350
   orbitThickness: 10
+  innerRadius: 0
 --- !u!43 &1755591952
 Mesh:
   m_ObjectHideFlags: 0
