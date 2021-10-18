@@ -3,28 +3,26 @@ using UnityEngine;
 public class PlanetaryMovement : CelestialMovement
 {
     private PlanetData planetData;
-    private bool inOrbit;
+    private CelestialObjectData starData;
+    private bool alreadyInOrbit;
 
     override protected void Awake()
     {
         base.Awake();
+        starData = SolarSystemGenerator.Instance.Star;
         planetData = (PlanetData)celestialData;
     }
 
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        CelestialObjectData starData = SolarSystemGenerator.Instance.Star;
         PlanetaryOrbit orbit = planetData.Orbit;
-        float sqrMag = Vector3.SqrMagnitude(planetData.transform.position - starData.transform.position);
-
         switch (planetData.ObjectStaus)
         {
             case CelestialObjectData.CelestialObjectStaus.Drifting:
                 planetData.RigidBody.AddForce((starData.transform.position - transform.position).normalized * GetGravitationalForce(starData));
-                if (sqrMag < orbit.OuterRadius * orbit.OuterRadius && sqrMag > orbit.InnerRadius * orbit.InnerRadius)
+                if (WithinOrbitLimits(starData.transform.position, orbit.OuterRadius, orbit.InnerRadius))
                 {
-                    Debug.Log("Planet: " + planetData.gameObject.name + " is in orbit!");
                     AddInitialOrbitVelocityToStar();
                     orbit.onOrbitEnter?.Invoke();
                     planetData.SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Orbiting);
@@ -32,28 +30,27 @@ public class PlanetaryMovement : CelestialMovement
                 break;
             case CelestialObjectData.CelestialObjectStaus.Orbiting:
                 planetData.RigidBody.AddForce((starData.transform.position - transform.position).normalized * GetGravitationalForce(starData));
-                if (sqrMag > orbit.OuterRadius * orbit.OuterRadius || sqrMag < orbit.InnerRadius * orbit.InnerRadius)
+                if (!WithinOrbitLimits(starData.transform.position, orbit.OuterRadius, orbit.InnerRadius))
                 {
-                    Debug.Log("Planet: " + planetData.gameObject.name + " is out of orbit!");
                     orbit.onOrbitExit?.Invoke();
                     planetData.SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Drifting);
                 }
                 break;
             case CelestialObjectData.CelestialObjectStaus.Tethered:
-                if (sqrMag < orbit.OuterRadius * orbit.OuterRadius && sqrMag > orbit.InnerRadius * orbit.InnerRadius)
+                if (WithinOrbitLimits(starData.transform.position, orbit.OuterRadius, orbit.InnerRadius))
                 {
-                    if (!inOrbit)
+                    if (!alreadyInOrbit)
                     {
                         orbit.onOrbitEnter?.Invoke();
-                        inOrbit = true;
+                        alreadyInOrbit = true;
                     }
                 }
                 else
                 {
-                    if (inOrbit)
+                    if (alreadyInOrbit)
                     {
                         orbit.onOrbitExit?.Invoke();
-                        inOrbit = false;
+                        alreadyInOrbit = false;
                     }
                 }
                 break;
@@ -84,5 +81,13 @@ public class PlanetaryMovement : CelestialMovement
     private void AddInitialOrbitVelocityToStar()
     {
         AddPlanetInitialForce(SolarSystemGenerator.Instance.Star);
+    }
+
+    private bool WithinOrbitLimits(Vector3 _orbitCenter, float _outerLimit, float _innerLimit)
+    {
+        float sqrMag = Vector3.SqrMagnitude(planetData.transform.position - _orbitCenter);
+        if (sqrMag < _outerLimit * _outerLimit && sqrMag > _innerLimit * _innerLimit)
+            return true;
+        return false;
     }
 }

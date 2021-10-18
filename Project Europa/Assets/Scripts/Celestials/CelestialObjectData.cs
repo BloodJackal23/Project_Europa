@@ -13,7 +13,8 @@ public class CelestialObjectData : MonoBehaviour
 
     public enum CelestialObjectStaus {Stationary, Orbiting, Drifting, Tethered, Destroyed}
     public CelestialObjectStaus ObjectStaus { get { return objectStaus; } }
-    public Rigidbody RigidBody { get 
+    public Rigidbody RigidBody 
+    { get 
         {
             if (rigidbody == null)
                 rigidbody = GetComponent<Rigidbody>();
