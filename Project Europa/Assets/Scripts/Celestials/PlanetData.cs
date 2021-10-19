@@ -5,6 +5,7 @@ using Procedural;
 public class PlanetData : CelestialObjectData
 {
     [FoldoutGroup("Components"), SerializeField] private ProceduralPlanetLibrary planetLibrary;
+    [FoldoutGroup("Components"), SerializeField] private PlanetMarker marker;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private PlanetaryOrbit orbit;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private bool clockwiseOrbit;
 
@@ -24,13 +25,19 @@ public class PlanetData : CelestialObjectData
 
     private void OnEnable()
     {
-        PlanetMarker newMarker = Instantiate(attributes.MarkerPrefab.gameObject).GetComponent<PlanetMarker>();
-        newMarker.InitializeMarker(transform);
+        marker.transform.parent = null;
+        marker.transform.localScale = new Vector3(marker.Scale, marker.Scale, 1);
+        marker.transform.parent = transform;
+        marker.InitializeMarker(transform);
+        orbit.onOrbitEnter += marker.SetMarkerToOnOrbit;
+        orbit.onOrbitExit += marker.SetMarkerToOffOrbit;
     }
 
     private void OnDisable()
     {
         onDestroyed = null;
+        orbit.onOrbitEnter = null;
+        orbit.onOrbitExit = null;
     }
 
     private void InitializeProceduralData()

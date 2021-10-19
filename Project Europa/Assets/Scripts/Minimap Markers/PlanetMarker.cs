@@ -1,39 +1,32 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class PlanetMarker : MovingObjectMarker
+public class PlanetMarker : ObjectMarker
 {
     [FoldoutGroup("Attributes"), SerializeField] private Sprite offOrbitSprite;
     [FoldoutGroup("Attributes"), SerializeField] private Color onOrbitColor = Color.green;
     [FoldoutGroup("Attributes"), SerializeField] private Color offOrbitColor = Color.red;
 
     private PlanetData planet;
-    public override void InitializeMarker(Transform _target)
+    private Quaternion initialRot;
+
+    private void Start()
     {
-        base.InitializeMarker(_target);
-        if (targetObject.TryGetComponent(out planet))
-        {
-            planet.onDestroyed += OnTargetDestroyed;
-            planet.Orbit.onOrbitEnter += SetMarkerToOnOrbit;
-            planet.Orbit.onOrbitExit += SetMarkerToOffOrbit;
-        }
+        initialRot = transform.rotation;
     }
 
-    protected override void OnTargetDestroyed()
+    private void Update()
     {
-        planet.onDestroyed -= OnTargetDestroyed;
-        planet.Orbit.onOrbitEnter -= SetMarkerToOnOrbit;
-        planet.Orbit.onOrbitExit -= SetMarkerToOffOrbit;
-        base.OnTargetDestroyed();
+        transform.rotation = initialRot;
     }
 
-    private void SetMarkerToOnOrbit()
+    public void SetMarkerToOnOrbit()
     {
         spriteRenderer.sprite = mainSprite;
         spriteRenderer.color = onOrbitColor;
     }
 
-    private void SetMarkerToOffOrbit()
+    public void SetMarkerToOffOrbit()
     {
         spriteRenderer.sprite = offOrbitSprite;
         spriteRenderer.color = offOrbitColor;

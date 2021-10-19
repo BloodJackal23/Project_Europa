@@ -15,9 +15,9 @@ MonoBehaviour:
   spriteRenderer: {fileID: 5301923120497842700}
   mainSprite: {fileID: 21300000, guid: a14e6ee680df42f4c99bf69bc3d6b9ca, type: 3}
   yOffset: 90
-  targetObject: {fileID: 0}
+  scale: 300
   offOrbitSprite: {fileID: 21300000, guid: a14e6ee680df42f4c99bf69bc3d6b9ca, type: 3}
-  onOrbitColor: {r: 0, g: 1, b: 0, a: 1}
+  onOrbitColor: {r: 0, g: 1, b: 0.58431375, a: 1}
   offOrbitColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &8029606935552252637
 PrefabInstance:

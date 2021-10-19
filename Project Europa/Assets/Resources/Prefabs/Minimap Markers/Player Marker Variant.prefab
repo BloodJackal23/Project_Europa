@@ -15,7 +15,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 4691272606923793033}
   mainSprite: {fileID: 21300000, guid: 90335e5423c010749a50f906b965fa54, type: 3}
   yOffset: 100
-  targetObject: {fileID: 0}
+  scale: 300
 --- !u!1001 &7485103110492791384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29,15 +29,15 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 90335e5423c010749a50f906b965fa54, type: 3}
     - target: {fileID: 2808788265127018705, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2808788265127018705, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 0.55496454
       objectReference: {fileID: 0}
     - target: {fileID: 2808788265127018705, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5316103912851094580, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
       propertyPath: m_Name
