@@ -8,9 +8,6 @@ public class PlanetData : CelestialObjectData
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private PlanetaryOrbit orbit;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private bool clockwiseOrbit;
 
-    //public delegate void OnOrbitEnter();
-    //public OnOrbitEnter onOrbitEnter;
-
     public delegate void OnDestroyed();
     public OnDestroyed onDestroyed;
     public ProceduralPlanetLibrary PlanetLibrary { get { return planetLibrary; } }
@@ -25,9 +22,14 @@ public class PlanetData : CelestialObjectData
         onDestroyed += DestroyPlanet;
     }
 
+    private void OnEnable()
+    {
+        PlanetMarker newMarker = Instantiate(attributes.MarkerPrefab.gameObject).GetComponent<PlanetMarker>();
+        newMarker.InitializeMarker(transform);
+    }
+
     private void OnDisable()
     {
-        //onOrbitEnter = null;
         onDestroyed = null;
     }
 

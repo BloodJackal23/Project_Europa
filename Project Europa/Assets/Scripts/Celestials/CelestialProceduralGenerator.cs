@@ -11,7 +11,7 @@ namespace Procedural
             int namesLength = _library.PlanetsNames.Length;
             string randName = _library.PlanetsNames[Random.Range(0, namesLength)] + "-" + Random.Range(0, 1000).ToString("000");
             Material randMat = _library.Materials[Random.Range(0, _library.Materials.Length)];
-            return new CelestialAttributes(randMass, randScale, randName, randMat);
+            return new CelestialAttributes(randMass, randScale, randName, randMat, _library.MarkerPrefab);
         }
     }
 }

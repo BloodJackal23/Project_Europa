@@ -9,8 +9,11 @@ public class ProceduralPlanetLibrary : ScriptableObject
     [FoldoutGroup("Randomized Attributes"), SerializeField] private Material[] materials;
     [FoldoutGroup("Randomized Attributes"), SerializeField] private string[] planetsNames;
 
+    [FoldoutGroup("Display Attributes"), SerializeField] private ObjectMarker markerPrefab;
+
     public float[] MassRange { get { return massRange; } }
     public float[] ScaleRange { get { return scaleRange; } }
     public Material[] Materials { get { return materials; } }
     public string[] PlanetsNames { get { return planetsNames; } }
+    public ObjectMarker MarkerPrefab { get { return markerPrefab; } }
 }

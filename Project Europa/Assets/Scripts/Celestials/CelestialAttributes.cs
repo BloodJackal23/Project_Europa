@@ -1,17 +1,26 @@
 using UnityEngine;
+using Sirenix.OdinInspector;
 
+[System.Serializable]
 public class CelestialAttributes
 {
-    public float Mass { get; private set; }
-    public float Scale { get; private set; }
-    public string Name { get; private set; }
-    public Material ObjectMaterial { get; private set; }
+    [FoldoutGroup("Procedural Attributes"), SerializeField, ReadOnly] private float mass;
+    [FoldoutGroup("Procedural Attributes"), SerializeField, ReadOnly] private float scale;
+    [FoldoutGroup("Procedural Attributes"), SerializeField, ReadOnly] private string name;
+    [FoldoutGroup("Procedural Attributes"), SerializeField, ReadOnly] private Material objectMaterial;
+    [FoldoutGroup("Display Attributes"), SerializeField, ReadOnly] private ObjectMarker markerPrefab;
+    public float Mass { get { return mass; } }
+    public float Scale { get { return scale; } }
+    public string Name { get { return name; } }
+    public Material ObjectMaterial { get { return objectMaterial; } }
+    public ObjectMarker MarkerPrefab { get { return markerPrefab; } }
 
-    public CelestialAttributes(float _mass, float _scale, string _name, Material _mat)
+    public CelestialAttributes(float _mass, float _scale, string _name, Material _mat, ObjectMarker _markerPrefab)
     {
-        Mass = _mass;
-        Scale = _scale;
-        Name = _name;
-        ObjectMaterial = _mat;
+        mass = _mass;
+        scale = _scale;
+        name = _name;
+        objectMaterial = _mat;
+        markerPrefab = _markerPrefab;
     }
 }
