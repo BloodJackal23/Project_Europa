@@ -19,16 +19,16 @@ public class TetherGun : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.P_Input.PlayerActions.Fire.performed += context => Shoot();
-        InputManager.P_Input.PlayerActions.Detach.performed += context => StopTethering();
+        InputManager.P_Input.PlayerActions.Fire.started += context => Shoot();
+        InputManager.P_Input.PlayerActions.Detach.started += context => StopTethering();
         ReadyToFire = true;
         tetherLine.enabled = false;
     }
 
     private void OnDisable()
     {
-        InputManager.P_Input.PlayerActions.Fire.performed -= context => Shoot();
-        InputManager.P_Input.PlayerActions.Detach.performed -= context => StopTethering();
+        InputManager.P_Input.PlayerActions.Fire.started -= context => Shoot();
+        InputManager.P_Input.PlayerActions.Detach.started -= context => StopTethering();
     }
 
     private void Shoot()
