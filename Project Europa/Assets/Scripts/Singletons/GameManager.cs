@@ -46,11 +46,17 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
     }
 
-    //private void OnEnable()
-    //{
-    //    SceneManager.sceneLoaded += OnSceneLoaded;
-    //    SceneSystem.onLoadStart += ActivateLoadingScreen;
-    //}
+    private void OnEnable()
+    {
+        InputManager.P_Input.PlayerActions.Pause.performed += context => QuitGame();
+        //SceneManager.sceneLoaded += OnSceneLoaded;
+        //SceneSystem.onLoadStart += ActivateLoadingScreen;
+    }
+
+    private void OnDisable()
+    {
+        InputManager.P_Input.PlayerActions.Pause.performed -= context => QuitGame();
+    }
 
     //private void Start()
     //{
