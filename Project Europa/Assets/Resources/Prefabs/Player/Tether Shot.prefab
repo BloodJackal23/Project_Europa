@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1669984929303947255}
   - component: {fileID: 4702861350433354558}
   - component: {fileID: 8684972535622280373}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Tether Shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
 --- !u!114 &1669984929303947255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,15 +101,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5482434500355501296, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5482434500355501298, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5482434500355501300, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5482434500355501302, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
       propertyPath: m_Name
@@ -117,23 +117,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5482434500355501302, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5482434500355501304, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5482434500355501306, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5482434500355501308, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5482434500355501310, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5482434500355862742, guid: e093479fd9816254ca8e50a8c3e09068, type: 3}
       propertyPath: m_RootOrder

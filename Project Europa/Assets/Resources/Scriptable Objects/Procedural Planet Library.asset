@@ -72,3 +72,4 @@ MonoBehaviour:
   - Atlas
   - Pandora
   - Aegir
+  markerPrefab: {fileID: 2226480974543550091, guid: 355efed9ba230e8479f7fd5ebcabdf2d, type: 3}

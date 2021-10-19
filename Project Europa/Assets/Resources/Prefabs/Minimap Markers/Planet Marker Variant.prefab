@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &2226480974543550091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2785613399740344041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba4067d543adbee49ac8f80f501cc14a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 5301923120497842700}
+  mainSprite: {fileID: 21300000, guid: a14e6ee680df42f4c99bf69bc3d6b9ca, type: 3}
+  yOffset: 90
+  scale: 300
+  offOrbitSprite: {fileID: 21300000, guid: a14e6ee680df42f4c99bf69bc3d6b9ca, type: 3}
+  onOrbitColor: {r: 0, g: 1, b: 0.58431375, a: 1}
+  offOrbitColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!1001 &8029606935552252637
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5316103912851094580, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+      propertyPath: m_Name
+      value: Planet Marker Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831025250993918838, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831025250993918838, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831025250993918838, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831025250993918838, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831025250993918838, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831025250993918838, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831025250993918838, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831025250993918838, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831025250993918838, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831025250993918838, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831025250993918838, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831025250993918838, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831025250993918838, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831025250993918838, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6083749395071193432, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+--- !u!1 &2785613399740344041 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5316103912851094580, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+  m_PrefabInstance: {fileID: 8029606935552252637}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &5301923120497842700 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2808788265127018705, guid: 75937c455e647c14ca8262cd59c33c26, type: 3}
+  m_PrefabInstance: {fileID: 8029606935552252637}
+  m_PrefabAsset: {fileID: 0}

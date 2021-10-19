@@ -4,11 +4,13 @@ using Sirenix.OdinInspector;
 
 public class SolarSystemGenerator : Singleton<SolarSystemGenerator>
 {
+    public const int MAX_ORBITS_COUNT = 7;
+
     [FoldoutGroup("Children"), SerializeField] private CelestialObjectData star;
     [FoldoutGroup("Children"), SerializeField] private PlanetData[] planets;
     [FoldoutGroup("Children"), SerializeField] private PlanetaryOrbit[] orbits;
 
-    [FoldoutGroup("Attributes"), SerializeField, Range(1, 7)] int activeOrbits;
+    [FoldoutGroup("Attributes"), SerializeField, Range(1, MAX_ORBITS_COUNT)] int activeOrbits;
     [FoldoutGroup("Attributes"), SerializeField, Range(1f, 9999999f)] private float g;
     [FoldoutGroup("Attributes"), SerializeField, Range(-10f, 10f)] private float orbitalOffset = -2.5f;
 
@@ -35,7 +37,7 @@ public class SolarSystemGenerator : Singleton<SolarSystemGenerator>
             {
                 int rand = 0;
                 do
-                    rand = Random.Range(0, activeOrbits);
+                    rand = Random.Range(0, MAX_ORBITS_COUNT);
                 while (selectedOrbits.Contains(orbits[rand]));
                 AssignPlanetToOrbit(orbits[rand], planets[rand]);
                 selectedOrbits.Add(orbits[rand]);
@@ -51,9 +53,9 @@ public class SolarSystemGenerator : Singleton<SolarSystemGenerator>
     private void AssignPlanetToOrbit(PlanetaryOrbit _orbit, PlanetData _planet)
     {
         Vector2 randomLocationOnOrbit = Random.insideUnitCircle.normalized * (_orbit.OuterRadius + orbitalOffset);
+        _planet.SetOrbit(_orbit);
         _planet.gameObject.SetActive(true);
         _orbit.gameObject.SetActive(true);
         _planet.transform.position = new Vector3(randomLocationOnOrbit.x, _planet.transform.position.y, randomLocationOnOrbit.y);
-        _planet.SetOrbit(_orbit);
     }
 }
