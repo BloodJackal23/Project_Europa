@@ -8,6 +8,7 @@ public class CelestialDestroyer : MonoBehaviour
         {
             targetPlanet.SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Destroyed);
             targetPlanet.onDestroyed?.Invoke();
+            Debug.Log("Planet: " + targetPlanet.Attributes.Name + " has been destroyed!");
         }
     }
 }

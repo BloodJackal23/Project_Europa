@@ -5,9 +5,10 @@ using Procedural;
 public class PlanetData : CelestialObjectData
 {
     [FoldoutGroup("Components"), SerializeField] private ProceduralPlanetLibrary planetLibrary;
-    [FoldoutGroup("Components"), SerializeField] private PlanetMarker marker;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private PlanetaryOrbit orbit;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private bool clockwiseOrbit;
+
+    private PlanetMarker planetMarker;
 
     public delegate void OnDestroyed();
     public OnDestroyed onDestroyed;
@@ -23,14 +24,16 @@ public class PlanetData : CelestialObjectData
         onDestroyed += DestroyPlanet;
     }
 
-    private void OnEnable()
+    override protected void OnEnable()
     {
-        marker.transform.parent = null;
-        marker.transform.localScale = new Vector3(marker.Scale, marker.Scale, 1);
-        marker.transform.parent = transform;
-        marker.InitializeMarker(transform);
-        orbit.onOrbitEnter += marker.SetMarkerToOnOrbit;
-        orbit.onOrbitExit += marker.SetMarkerToOffOrbit;
+        base.OnEnable();
+        planetMarker = (PlanetMarker)objectMarker;
+        planetMarker.transform.parent = null;
+        planetMarker.transform.localScale = new Vector3(planetMarker.Scale, planetMarker.Scale, 1);
+        planetMarker.transform.parent = transform;
+        orbit.onOrbitEnter += planetMarker.SetMarkerToOnOrbit;
+        orbit.onOrbitExit += planetMarker.SetMarkerToOffOrbit;
+        onDestroyed += ScoreManager.Instance.ReduceRemainingPlanetsByOne;
     }
 
     private void OnDisable()
@@ -50,8 +53,8 @@ public class PlanetData : CelestialObjectData
 
     private void SetComponentsValues()
     {
-        rigidbody.mass = attributes.Mass;
-        transform.localScale *= attributes.Scale;
+        rigidbody.mass = attributes.Density * attributes.VolumeMultiplier;
+        transform.localScale *= attributes.VolumeMultiplier;
         meshRenderer.material = attributes.ObjectMaterial;
     }
     public override void SetObjectStatus(CelestialObjectStaus _newStatus)

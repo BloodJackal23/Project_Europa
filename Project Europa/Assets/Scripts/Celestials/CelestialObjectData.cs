@@ -6,6 +6,7 @@ public class CelestialObjectData : MonoBehaviour
 {
     [FoldoutGroup("Components"), SerializeField] protected Rigidbody rigidbody;
     [FoldoutGroup("Components"), SerializeField] protected MeshRenderer meshRenderer;
+    [FoldoutGroup("Components"), SerializeField] protected ObjectMarker objectMarker;
 
     [FoldoutGroup("Attributes"), SerializeField] protected CelestialAttributes attributes;
     [FoldoutGroup("Attributes"), SerializeField] protected CelestialObjectStaus initialStatus = CelestialObjectStaus.Stationary;
@@ -26,6 +27,11 @@ public class CelestialObjectData : MonoBehaviour
     virtual protected void Awake()
     {
         objectStaus = initialStatus;
+    }
+
+    virtual protected void OnEnable()
+    {
+        objectMarker.InitializeMarker(transform);
     }
 
     public virtual void SetObjectStatus(CelestialObjectStaus _newStatus)

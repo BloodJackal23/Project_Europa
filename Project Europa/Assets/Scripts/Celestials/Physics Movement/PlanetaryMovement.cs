@@ -9,18 +9,18 @@ public class PlanetaryMovement : CelestialMovement
     override protected void Awake()
     {
         base.Awake();
-        starData = SolarSystemGenerator.Instance.Star;
+        starData = SolarSystem.Instance.Star;
         planetData = (PlanetData)celestialData;
     }
 
-    protected override void FixedUpdate()
+    private void FixedUpdate()
     {
-        base.FixedUpdate();
         PlanetaryOrbit orbit = planetData.Orbit;
         switch (planetData.ObjectStaus)
         {
             case CelestialObjectData.CelestialObjectStaus.Drifting:
-                planetData.RigidBody.AddForce((starData.transform.position - transform.position).normalized * GetGravitationalForce(starData));
+                AddGravitationalForce(starData);
+                AddGravitationalForceFromOtherCelestialBodies();
                 if (WithinOrbitLimits(starData.transform.position, orbit.OuterRadius, orbit.InnerRadius))
                 {
                     AddInitialOrbitVelocityToStar();
@@ -29,7 +29,8 @@ public class PlanetaryMovement : CelestialMovement
                 }
                 break;
             case CelestialObjectData.CelestialObjectStaus.Orbiting:
-                planetData.RigidBody.AddForce((starData.transform.position - transform.position).normalized * GetGravitationalForce(starData));
+                AddGravitationalForce(starData);
+                AddGravitationalForceFromOtherCelestialBodies();
                 if (!WithinOrbitLimits(starData.transform.position, orbit.OuterRadius, orbit.InnerRadius))
                 {
                     orbit.onOrbitExit?.Invoke();
@@ -65,7 +66,7 @@ public class PlanetaryMovement : CelestialMovement
         Vector3 direction = (_target.transform.position - transform.position).normalized;
         Vector3 perp = new Vector3(-direction.z, 0, direction.x);
         float r = Vector3.Distance(transform.position, _target.transform.position);
-        return perp * Mathf.Sqrt(SolarSystemGenerator.Instance.G * m2 / r);
+        return perp * Mathf.Sqrt(SolarSystem.Instance.G * m2 / r);
     }
 
     private void AddPlanetInitialForce(CelestialObjectData _target)
@@ -80,7 +81,7 @@ public class PlanetaryMovement : CelestialMovement
 
     private void AddInitialOrbitVelocityToStar()
     {
-        AddPlanetInitialForce(SolarSystemGenerator.Instance.Star);
+        AddPlanetInitialForce(SolarSystem.Instance.Star);
     }
 
     private bool WithinOrbitLimits(Vector3 _orbitCenter, float _outerLimit, float _innerLimit)

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [FoldoutGroup("Components"), SerializeField] private Rigidbody rigidbody;
+    [FoldoutGroup("Components"), SerializeField] private ObjectMarker playerMarker;
     [FoldoutGroup("Attributes"), SerializeField, Range(0f, 100f)] private float acceleration = 5f;
     [FoldoutGroup("Attributes"), SerializeField, Range(0f, 100f)] private float decelearation = 3f;
     [FoldoutGroup("Attributes"), SerializeField, Range(0f, 100f)] private float brakeForce = 2f;
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         playerInput.PlayerActions.Enable();
+        playerMarker.InitializeMarker(transform);
     }
 
     void Update()
