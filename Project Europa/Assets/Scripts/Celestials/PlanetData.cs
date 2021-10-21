@@ -33,7 +33,7 @@ public class PlanetData : CelestialObjectData
         planetMarker.transform.parent = transform;
         orbit.onOrbitEnter += planetMarker.SetMarkerToOnOrbit;
         orbit.onOrbitExit += planetMarker.SetMarkerToOffOrbit;
-        onDestroyed += ScoreManager.Instance.ReduceRemainingPlanetsByOne;
+        onDestroyed += LevelManager.Instance.ReduceRemainingPlanetsByOne;
     }
 
     private void OnDisable()
