@@ -5,22 +5,21 @@ using System.Collections;
 public class LevelManager : Singleton<LevelManager>
 {
     [FoldoutGroup("External References"), SerializeField] private GamePanelDisplay gamePanelDisplay;
-    [FoldoutGroup("Attributes"), SerializeField, Range(0f, 600f)] private float levelTime = 120f;
     [FoldoutGroup("Attributes"), SerializeField, Range(0f, 1f)] private float remainingPlanetsThreshold = 0.5f;
-    [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private float remainingTime;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private int remainingPlanets;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private int remainingPlanetsThresholdCount;
+    [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private bool roundActive;
 
     private SolarSystem solarSystem;
-    private IEnumerator timerCoroutine;
+    private IEnumerator roundCoroutine;
     public int RemainingPlanets { get { return remainingPlanets; } }
-    public float RemainingTime { get { return remainingTime; } }
+    public bool RoundActive { get { return roundActive; } }
 
-    public delegate void OnGameWon();
-    public OnGameWon onGameWon;
+    public delegate void OnRoundStart();
+    public OnRoundStart onRoundStart;
 
-    public delegate void OnGameLost();
-    public OnGameLost onGameLost;
+    public delegate void OnRoundEnd();
+    public OnRoundEnd onRoundEnd;
 
     protected override void Awake()
     {
@@ -30,20 +29,19 @@ public class LevelManager : Singleton<LevelManager>
         {
             gamePanelDisplay = FindObjectOfType<GamePanelDisplay>();
         }
-        timerCoroutine = CountRemainingTime();
+        roundCoroutine = RunRoundTimer();
     }
 
     private void OnEnable()
     {
-        onGameWon += WinGame;
-        onGameLost += LoseGame;
-        remainingTime = levelTime;
+        onRoundStart += OnRoundStarted;
+        onRoundEnd += OnRoundEnded;
     }
 
     private void OnDisable()
     {
-        onGameWon = null;
-        onGameLost = null;
+        onRoundStart = null;
+        onRoundEnd = null;
     }
 
     private void Start()
@@ -52,21 +50,18 @@ public class LevelManager : Singleton<LevelManager>
         remainingPlanets = solarSystem.PlanetsCount;
         remainingPlanetsThresholdCount = Mathf.FloorToInt(solarSystem.PlanetsCount * remainingPlanetsThreshold);
         gamePanelDisplay.UpdatePlanetsCount(remainingPlanets);
-        StartCoroutine(timerCoroutine);
+        StartRound();
     }
 
-    private IEnumerator CountRemainingTime()
+    private IEnumerator RunRoundTimer()
     {
-        float remainingTime = levelTime;
-        while(remainingTime > 0)
+        float timer = 0;
+        while(roundActive)
         {
-            remainingTime -= Time.deltaTime;
-            if (remainingTime < 0)
-                remainingTime = 0;
-            gamePanelDisplay.UpdateRemainingTime(remainingTime);
+            timer += Time.deltaTime;
+            gamePanelDisplay.UpdateRemainingTime(timer);
             yield return null;
         }
-        onGameWon?.Invoke();
     }
 
     public void ReduceRemainingPlanetsByOne()
@@ -75,19 +70,35 @@ public class LevelManager : Singleton<LevelManager>
         remainingPlanets = Mathf.Clamp(remainingPlanets, 0, solarSystem.PlanetsCount);
         gamePanelDisplay.UpdatePlanetsCount(remainingPlanets);
         if(remainingPlanets < remainingPlanetsThresholdCount)
+            EndRound();
+    }
+
+    public void StartRound()
+    {
+        if (!roundActive)
         {
-            onGameLost?.Invoke();
+            roundActive = true;
+            onRoundStart?.Invoke();
+            StartCoroutine(roundCoroutine);
         }
     }
 
-    public void WinGame()
+    private void OnRoundStarted()
     {
-        Debug.Log("Game Won!");
+        Debug.Log("Round Started");
     }
 
-    public void LoseGame()
+    public void EndRound()
     {
-        Debug.Log("Game Lost!");
-        StopCoroutine(timerCoroutine);
+        if (roundActive)
+        {
+            onRoundEnd?.Invoke();
+            roundActive = false;
+        }
+    }
+
+    private void OnRoundEnded()
+    {
+        Debug.Log("Round Ended");
     }
 }
