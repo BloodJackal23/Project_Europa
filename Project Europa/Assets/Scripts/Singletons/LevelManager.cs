@@ -1,17 +1,16 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
-using System.Collections;
 
 public class LevelManager : Singleton<LevelManager>
 {
-    [FoldoutGroup("External References"), SerializeField] private GamePanelDisplay gamePanelDisplay;
     [FoldoutGroup("Attributes"), SerializeField, Range(0f, 1f)] private float remainingPlanetsThreshold = 0.5f;
+    [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private int score;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private int remainingPlanets;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private int remainingPlanetsThresholdCount;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private bool roundActive;
 
     private SolarSystem solarSystem;
-    private IEnumerator roundCoroutine;
+    public int Score { get { return score; } }
     public int RemainingPlanets { get { return remainingPlanets; } }
     public bool RoundActive { get { return roundActive; } }
 
@@ -25,11 +24,6 @@ public class LevelManager : Singleton<LevelManager>
     {
         dontDestroyOnLoad = false;
         base.Awake();
-        if(gamePanelDisplay == null)
-        {
-            gamePanelDisplay = FindObjectOfType<GamePanelDisplay>();
-        }
-        roundCoroutine = RunRoundTimer();
     }
 
     private void OnEnable()
@@ -49,26 +43,13 @@ public class LevelManager : Singleton<LevelManager>
         solarSystem = SolarSystem.Instance;
         remainingPlanets = solarSystem.PlanetsCount;
         remainingPlanetsThresholdCount = Mathf.FloorToInt(solarSystem.PlanetsCount * remainingPlanetsThreshold);
-        gamePanelDisplay.UpdatePlanetsCount(remainingPlanets);
         StartRound();
-    }
-
-    private IEnumerator RunRoundTimer()
-    {
-        float timer = 0;
-        while(roundActive)
-        {
-            timer += Time.deltaTime;
-            gamePanelDisplay.UpdateRemainingTime(timer);
-            yield return null;
-        }
     }
 
     public void ReduceRemainingPlanetsByOne()
     {
         remainingPlanets -= 1;
         remainingPlanets = Mathf.Clamp(remainingPlanets, 0, solarSystem.PlanetsCount);
-        gamePanelDisplay.UpdatePlanetsCount(remainingPlanets);
         if(remainingPlanets < remainingPlanetsThresholdCount)
             EndRound();
     }
@@ -79,7 +60,6 @@ public class LevelManager : Singleton<LevelManager>
         {
             roundActive = true;
             onRoundStart?.Invoke();
-            StartCoroutine(roundCoroutine);
         }
     }
 
