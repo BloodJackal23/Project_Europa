@@ -1,7 +1,10 @@
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class PlanetaryMovement : CelestialMovement
 {
+    [FoldoutGroup("Attributes"), SerializeField, Range(0.01f, 5f)] private float otherPlanetsGravityModifier = 1;
+
     private PlanetData planetData;
     private CelestialObjectData starData;
     private bool alreadyInOrbit;
@@ -20,7 +23,7 @@ public class PlanetaryMovement : CelestialMovement
         {
             case CelestialObjectData.CelestialObjectStaus.Drifting:
                 AddGravitationalForce(starData);
-                AddGravitationalForceFromOtherCelestialBodies();
+                AddGravitationalForceFromOtherCelestialBodies(otherPlanetsGravityModifier);
                 if (WithinOrbitLimits(starData.transform.position, orbit.OuterRadius, orbit.InnerRadius))
                 {
                     AddInitialOrbitVelocityToStar();
@@ -30,7 +33,7 @@ public class PlanetaryMovement : CelestialMovement
                 break;
             case CelestialObjectData.CelestialObjectStaus.Orbiting:
                 AddGravitationalForce(starData);
-                AddGravitationalForceFromOtherCelestialBodies();
+                AddGravitationalForceFromOtherCelestialBodies(otherPlanetsGravityModifier);
                 if (!WithinOrbitLimits(starData.transform.position, orbit.OuterRadius, orbit.InnerRadius))
                 {
                     orbit.onOrbitExit?.Invoke();

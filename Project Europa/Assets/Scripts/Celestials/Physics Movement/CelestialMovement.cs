@@ -24,12 +24,12 @@ public class CelestialMovement : MonoBehaviour
         return SolarSystem.Instance.G * (m1 * m2) / r;
     }
 
-    protected void AddGravitationalForce(CelestialObjectData _target)
+    protected void AddGravitationalForce(CelestialObjectData _target, float _forceModifier = 1)
     {
-        celestialData.RigidBody.AddForce((_target.transform.position - transform.position).normalized * GetGravitationalForce(_target));
+        celestialData.RigidBody.AddForce((_target.transform.position - transform.position).normalized * GetGravitationalForce(_target) * _forceModifier);
     }
 
-    protected void AddGravitationalForceFromOtherCelestialBodies()
+    protected void AddGravitationalForceFromOtherCelestialBodies(float _gravitationMultiplier = 1)
     {
         Collider[] otherBodies = Physics.OverlapSphere(transform.position, gravitationalRadius, gravitationalTargetMask, QueryTriggerInteraction.Ignore);
         foreach(Collider body in otherBodies)
@@ -37,7 +37,7 @@ public class CelestialMovement : MonoBehaviour
             if(body != GetComponent<Collider>() && body.TryGetComponent(out PlanetData planet))
             {
                 if(planet.ObjectStaus != CelestialObjectData.CelestialObjectStaus.Tethered)
-                    AddGravitationalForce(planet);
+                    AddGravitationalForce(planet, _gravitationMultiplier);
             }
         }
     }

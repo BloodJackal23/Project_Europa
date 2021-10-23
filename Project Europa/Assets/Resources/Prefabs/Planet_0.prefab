@@ -76,10 +76,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   celestialData: {fileID: 3218494574914477874}
-  gravitationalRadius: 120
+  gravitationalRadius: 300
   gravitationalTargetMask:
     serializedVersion: 2
     m_Bits: 128
+  otherPlanetsGravityModifier: 0.5
 --- !u!114 &5960159396063708054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planetData: {fileID: 3218494574914477874}
   onOrbitMultiplier: 5
+  scoreUpdateInterval: 1
 --- !u!33 &2740946120236838233
 MeshFilter:
   m_ObjectHideFlags: 0
