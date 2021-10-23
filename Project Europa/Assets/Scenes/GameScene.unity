@@ -5070,7 +5070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3e0fe3b2b312c4baa71e79966a7af6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreCounterText: {fileID: 36323179}
+  scoreCounterText: {fileID: 262913022}
   remainingTimeCounterText: {fileID: 234261125}
   remainingPlanetsCountText: {fileID: 1005740288}
 --- !u!114 &420881893
@@ -23799,8 +23799,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b8f0002a152e64bae4009a32d8516b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamePanelDisplay: {fileID: 0}
-  remainingPlanetsThreshold: 0.5
+  remainingPlanetsThreshold: 0.6
+  score: 0
+  roundTime: 0
   remainingPlanets: 0
   remainingPlanetsThresholdCount: 0
   roundActive: 0

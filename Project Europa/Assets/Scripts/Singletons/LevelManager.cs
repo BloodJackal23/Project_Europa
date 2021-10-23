@@ -5,12 +5,14 @@ public class LevelManager : Singleton<LevelManager>
 {
     [FoldoutGroup("Attributes"), SerializeField, Range(0f, 1f)] private float remainingPlanetsThreshold = 0.5f;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private int score;
+    [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private float roundTime;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private int remainingPlanets;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private int remainingPlanetsThresholdCount;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private bool roundActive;
 
     private SolarSystem solarSystem;
     public int Score { get { return score; } }
+    public float RoundTime { get { return roundTime; } }
     public int RemainingPlanets { get { return remainingPlanets; } }
     public bool RoundActive { get { return roundActive; } }
 
@@ -44,6 +46,11 @@ public class LevelManager : Singleton<LevelManager>
         remainingPlanets = solarSystem.PlanetsCount;
         remainingPlanetsThresholdCount = Mathf.FloorToInt(solarSystem.PlanetsCount * remainingPlanetsThreshold);
         StartRound();
+    }
+
+    public void AddToScore(int _value)
+    {
+        score += _value;
     }
 
     public void ReduceRemainingPlanetsByOne()

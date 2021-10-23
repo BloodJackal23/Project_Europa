@@ -58,5 +58,6 @@ public class GamePanelDisplay : MonoBehaviour
             UpdatePlanetsCount(levelManager.RemainingPlanets);
             yield return null;
         }
+        UpdatePlanetsCount(levelManager.RemainingPlanets);
     }
 }
