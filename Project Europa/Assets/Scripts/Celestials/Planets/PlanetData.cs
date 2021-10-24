@@ -19,14 +19,14 @@ public class PlanetData : CelestialObjectData
     override protected void Awake()
     {
         base.Awake();
-        InitializeProceduralData();
-        SetComponentsValues();
-        onDestroyed += DestroyPlanet;
     }
 
     override protected void OnEnable()
     {
         base.OnEnable();
+        InitializeProceduralData();
+        SetComponentsValues();
+        onDestroyed += DestroyPlanet;
         planetMarker = (PlanetMarker)objectMarker;
         planetMarker.transform.parent = null;
         planetMarker.transform.localScale = new Vector3(planetMarker.Scale, planetMarker.Scale, 1);
@@ -54,7 +54,7 @@ public class PlanetData : CelestialObjectData
     private void SetComponentsValues()
     {
         rigidbody.mass = attributes.Density * attributes.VolumeMultiplier;
-        transform.localScale *= attributes.VolumeMultiplier;
+        transform.localScale = new Vector3(attributes.VolumeMultiplier, attributes.VolumeMultiplier, attributes.VolumeMultiplier);
         meshRenderer.material = attributes.ObjectMaterial;
     }
     public override void SetObjectStatus(CelestialObjectStaus _newStatus)

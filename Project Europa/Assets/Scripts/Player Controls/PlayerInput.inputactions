@@ -128,6 +128,44 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "MenuAcions",
+            "id": "c9a5a217-787a-4057-add7-58d9d52fcc52",
+            "actions": [
+                {
+                    "name": "Replay",
+                    "type": "Button",
+                    "id": "818c25d7-bb8b-49e1-b6d8-4afeb76152ac",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "73879170-1a32-412e-9695-815ea8bd62a2",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Replay",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f374119d-7900-43ea-8906-f2ba2848f518",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Replay",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

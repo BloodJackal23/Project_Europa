@@ -141,6 +141,44 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""MenuAcions"",
+            ""id"": ""c9a5a217-787a-4057-add7-58d9d52fcc52"",
+            ""actions"": [
+                {
+                    ""name"": ""Replay"",
+                    ""type"": ""Button"",
+                    ""id"": ""818c25d7-bb8b-49e1-b6d8-4afeb76152ac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""73879170-1a32-412e-9695-815ea8bd62a2"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Replay"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f374119d-7900-43ea-8906-f2ba2848f518"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Replay"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -151,6 +189,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_PlayerActions_Fire = m_PlayerActions.FindAction("Fire", throwIfNotFound: true);
         m_PlayerActions_Detach = m_PlayerActions.FindAction("Detach", throwIfNotFound: true);
         m_PlayerActions_Pause = m_PlayerActions.FindAction("Pause", throwIfNotFound: true);
+        // MenuAcions
+        m_MenuAcions = asset.FindActionMap("MenuAcions", throwIfNotFound: true);
+        m_MenuAcions_Replay = m_MenuAcions.FindAction("Replay", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -253,11 +294,48 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         }
     }
     public PlayerActionsActions @PlayerActions => new PlayerActionsActions(this);
+
+    // MenuAcions
+    private readonly InputActionMap m_MenuAcions;
+    private IMenuAcionsActions m_MenuAcionsActionsCallbackInterface;
+    private readonly InputAction m_MenuAcions_Replay;
+    public struct MenuAcionsActions
+    {
+        private @PlayerInput m_Wrapper;
+        public MenuAcionsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Replay => m_Wrapper.m_MenuAcions_Replay;
+        public InputActionMap Get() { return m_Wrapper.m_MenuAcions; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuAcionsActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuAcionsActions instance)
+        {
+            if (m_Wrapper.m_MenuAcionsActionsCallbackInterface != null)
+            {
+                @Replay.started -= m_Wrapper.m_MenuAcionsActionsCallbackInterface.OnReplay;
+                @Replay.performed -= m_Wrapper.m_MenuAcionsActionsCallbackInterface.OnReplay;
+                @Replay.canceled -= m_Wrapper.m_MenuAcionsActionsCallbackInterface.OnReplay;
+            }
+            m_Wrapper.m_MenuAcionsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Replay.started += instance.OnReplay;
+                @Replay.performed += instance.OnReplay;
+                @Replay.canceled += instance.OnReplay;
+            }
+        }
+    }
+    public MenuAcionsActions @MenuAcions => new MenuAcionsActions(this);
     public interface IPlayerActionsActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnDetach(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+    }
+    public interface IMenuAcionsActions
+    {
+        void OnReplay(InputAction.CallbackContext context);
     }
 }
