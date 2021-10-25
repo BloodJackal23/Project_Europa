@@ -5,9 +5,10 @@ using Procedural;
 public class PlanetData : CelestialObjectData
 {
     [FoldoutGroup("Components"), SerializeField] private ProceduralPlanetLibrary planetLibrary;
-    [FoldoutGroup("Components"), SerializeField] private PlanetMarker marker;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private PlanetaryOrbit orbit;
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private bool clockwiseOrbit;
+
+    private PlanetMarker planetMarker;
 
     public delegate void OnDestroyed();
     public OnDestroyed onDestroyed;
@@ -18,26 +19,26 @@ public class PlanetData : CelestialObjectData
     override protected void Awake()
     {
         base.Awake();
+    }
+
+    override protected void OnEnable()
+    {
+        rigidbody.velocity *= 0;
         InitializeProceduralData();
         SetComponentsValues();
         onDestroyed += DestroyPlanet;
-    }
-
-    private void OnEnable()
-    {
-        marker.transform.parent = null;
-        marker.transform.localScale = new Vector3(marker.Scale, marker.Scale, 1);
-        marker.transform.parent = transform;
-        marker.InitializeMarker(transform);
-        orbit.onOrbitEnter += marker.SetMarkerToOnOrbit;
-        orbit.onOrbitExit += marker.SetMarkerToOffOrbit;
+        planetMarker = (PlanetMarker)objectMarker;
+        planetMarker.InitializeMarker(transform);
+        orbit.onOrbitEnter += planetMarker.SetMarkerToOnOrbit;
+        orbit.onOrbitExit += planetMarker.SetMarkerToOffOrbit;
+        onDestroyed += LevelManager.Instance.ReduceRemainingPlanetsByOne;
     }
 
     private void OnDisable()
     {
         onDestroyed = null;
-        orbit.onOrbitEnter = null;
-        orbit.onOrbitExit = null;
+        orbit.onOrbitEnter -= planetMarker.SetMarkerToOnOrbit;
+        orbit.onOrbitExit -= planetMarker.SetMarkerToOffOrbit;
     }
 
     private void InitializeProceduralData()
@@ -50,8 +51,8 @@ public class PlanetData : CelestialObjectData
 
     private void SetComponentsValues()
     {
-        rigidbody.mass = attributes.Mass;
-        transform.localScale *= attributes.Scale;
+        rigidbody.mass = attributes.Density * attributes.VolumeMultiplier;
+        transform.localScale = new Vector3(attributes.VolumeMultiplier, attributes.VolumeMultiplier, attributes.VolumeMultiplier);
         meshRenderer.material = attributes.ObjectMaterial;
     }
     public override void SetObjectStatus(CelestialObjectStaus _newStatus)

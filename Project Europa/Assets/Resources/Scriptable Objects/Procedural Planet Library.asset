@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58683cbfeb639b44ab192c6965bd0cd, type: 3}
   m_Name: Procedural Planet Library
   m_EditorClassIdentifier: 
-  massRange:
-  - 1
-  - 1000
-  scaleRange:
-  - 2.5
-  - 8.5
+  densityRange:
+  - 50
+  - 300
+  volumeMultiplierRange:
+  - 3
+  - 6.5
   materials:
   - {fileID: 2100000, guid: 2a5fb299939d20b43b0521e986840e64, type: 2}
   - {fileID: 2100000, guid: cf4ef11b934358e418942aedf6115758, type: 2}
@@ -72,4 +72,3 @@ MonoBehaviour:
   - Atlas
   - Pandora
   - Aegir
-  markerPrefab: {fileID: 2226480974543550091, guid: 355efed9ba230e8479f7fd5ebcabdf2d, type: 3}

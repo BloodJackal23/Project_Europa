@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2740946120236838228}
   - component: {fileID: 3218494574914477874}
   - component: {fileID: 2740946120236838235}
+  - component: {fileID: 5960159396063708054}
   - component: {fileID: 2740946120236838233}
   - component: {fileID: 2740946120236838230}
   - component: {fileID: 2740946120236838231}
@@ -51,15 +52,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 2740946120236838232}
   meshRenderer: {fileID: 2740946120236838230}
+  objectMarker: {fileID: 475531068392384038}
   attributes:
-    mass: 0
-    scale: 0
+    density: 0
+    volumeMultiplier: 0
     name: 
     objectMaterial: {fileID: 0}
   initialStatus: 2
   objectStaus: 0
   planetLibrary: {fileID: 11400000, guid: 7fc4d5fe05522134bb7b869802d39c8c, type: 2}
-  marker: {fileID: 475531068392384038}
   orbit: {fileID: 0}
   clockwiseOrbit: 0
 --- !u!114 &2740946120236838235
@@ -75,6 +76,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   celestialData: {fileID: 3218494574914477874}
+  gravitationalRadius: 300
+  gravitationalTargetMask:
+    serializedVersion: 2
+    m_Bits: 128
+  otherPlanetsGravityModifier: 0.5
+--- !u!114 &5960159396063708054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2740946120236838229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47be1ea0c501a37459567f3ccdfb8647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetData: {fileID: 3218494574914477874}
+  onOrbitMultiplier: 5
+  scoreUpdateInterval: 1
 --- !u!33 &2740946120236838233
 MeshFilter:
   m_ObjectHideFlags: 0

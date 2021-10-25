@@ -48,27 +48,25 @@ public class GameManager : Singleton<GameManager>
 
     private void OnEnable()
     {
-        InputManager.P_Input.PlayerActions.Pause.performed += context => QuitGame();
         //SceneManager.sceneLoaded += OnSceneLoaded;
         //SceneSystem.onLoadStart += ActivateLoadingScreen;
     }
 
-    private void OnDisable()
+    private void Start()
     {
-        InputManager.P_Input.PlayerActions.Pause.performed -= context => QuitGame();
+        InputManager.P_Input.PlayerActions.Pause.performed += context => QuitGame();
+        InputManager.P_Input.MenuAcions.Exit.performed += context => QuitGame();
+        InitSceneSettings();
+        //InitGameSettings();
     }
 
-    //private void Start()
-    //{
-    //    InitSceneSettings();
-    //    InitGameSettings();
-    //}
-
-    //private void OnDestroy()
-    //{
-    //    SceneManager.sceneLoaded -= OnSceneLoaded;
-    //    SceneSystem.onLoadStart -= ActivateLoadingScreen;
-    //}
+    private void OnDestroy()
+    {
+        InputManager.P_Input.PlayerActions.Pause.performed -= context => QuitGame();
+        InputManager.P_Input.MenuAcions.Exit.performed -= context => QuitGame();
+        //SceneManager.sceneLoaded -= OnSceneLoaded;
+        //SceneSystem.onLoadStart -= ActivateLoadingScreen;
+    }
 
     void ActivateLoadingScreen()
     {
