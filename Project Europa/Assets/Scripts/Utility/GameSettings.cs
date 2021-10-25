@@ -1,9 +1,9 @@
-﻿
+﻿using UnityEngine;
+using Sirenix.OdinInspector;
+
 public class GameSettings
 {
-    public float masterVolume = 6;
-    public float musicVolume = 4;
-    public float fxVolume = 4;
+    [FoldoutGroup("Attributes"), SerializeField, Range(-0f, 10f)] public float masterVolume = 6, musicVolume = 4, fxVolume = 4;
 
     public GameSettings(DefaultGameSettings _defaultSettings)
     {
@@ -21,9 +21,6 @@ public class GameSettings
 
     public static GameSettings DefaultSettings
     {
-        get
-        {
-            return new GameSettings(.5f, 1f, 1f);
-        }
+        get => new GameSettings(.5f, 1f, 1f);
     }
 }

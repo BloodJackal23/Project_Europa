@@ -1,20 +1,32 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.UI;
 
 public class PausePanel : MonoBehaviour
 {
     [FoldoutGroup("Components"), SerializeField] private CanvasGroup canvasGroup;
+    [FoldoutGroup("Components"), SerializeField] private Button quitButton;
+    [FoldoutGroup("Components"), SerializeField] private Slider volSlider;
 
+    private GameManager gameManager;
     void Start()
     {
-        GameManager.Instance.onGamePaused += ShowPausePanel;
-        GameManager.Instance.onGameResumed += HidePausePanel;
+        gameManager = GameManager.Instance;
+        gameManager.onGamePaused += ShowPausePanel;
+        gameManager.onGameResumed += HidePausePanel;
+        quitButton.onClick.AddListener(delegate { gameManager.QuitGame(); });
+        volSlider.onValueChanged.AddListener(delegate { gameManager.SetMasterVolume(volSlider.value); });
+        volSlider.value = gameManager.GetMasterVolume(gameManager.gameSettings);
+        if (!gameManager.GamePaused)
+        {
+            HidePausePanel();
+        }
     }
 
     private void OnDestroy()
     {
-        GameManager.Instance.onGamePaused -= ShowPausePanel;
-        GameManager.Instance.onGameResumed -= HidePausePanel;
+        gameManager.onGamePaused -= ShowPausePanel;
+        gameManager.onGameResumed -= HidePausePanel;
     }
 
     private void ShowPausePanel()

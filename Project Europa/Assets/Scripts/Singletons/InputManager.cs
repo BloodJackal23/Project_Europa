@@ -53,8 +53,6 @@ public class InputManager : Singleton<InputManager>
                 playerInput.PauseActions.Enable();
                 break;
         }
-        Debug.Log(playerInput.PlayerActions.ToString() + " is set to " + playerInput.PlayerActions.enabled);
-        Debug.Log(playerInput.MenuAcions.ToString() + " is set to " + playerInput.MenuAcions.enabled);
         activeMap = _map;
     }
 }

@@ -2,8 +2,6 @@
 using System.IO;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -22,11 +20,6 @@ public class GameManager : Singleton<GameManager>
 
     private SceneSettings sceneSettings;
 
-    #region Loading System
-    [Header("Loading System")]
-    [SerializeField] private GameObject loadingScreenCanvas;
-    #endregion
-
     #region Pause System
     public delegate void OnGamePaused();
     public OnGamePaused onGamePaused;
@@ -36,9 +29,6 @@ public class GameManager : Singleton<GameManager>
     public bool GamePaused { get; set; }
     #endregion
 
-    [SerializeField] private bool controlVideo = true;
-    public bool ControlVideo { get => controlVideo; }
-
     protected override void Awake()
     {
         dontDestroyOnLoad = true;
@@ -46,19 +36,11 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
     }
 
-    private void OnEnable()
-    {
-        //SceneManager.sceneLoaded += OnSceneLoaded;
-        //SceneSystem.onLoadStart += ActivateLoadingScreen;
-    }
-
     private void Start()
     {
-        InputManager.P_Input.PlayerActions.Pause.performed += context => PauseGameToggle();
-        InputManager.P_Input.PauseActions.Resume.performed += context => PauseGameToggle();
         InputManager.P_Input.MenuAcions.Exit.performed += context => QuitGame();
         InitSceneSettings();
-        //InitGameSettings();
+        InitGameSettings();
     }
 
     private void OnDestroy()
@@ -66,52 +48,7 @@ public class GameManager : Singleton<GameManager>
         InputManager.P_Input.PlayerActions.Pause.performed -= context => PauseGameToggle();
         InputManager.P_Input.PauseActions.Resume.performed -= context => PauseGameToggle();
         InputManager.P_Input.MenuAcions.Exit.performed -= context => QuitGame();
-        //SceneManager.sceneLoaded -= OnSceneLoaded;
-        //SceneSystem.onLoadStart -= ActivateLoadingScreen;
     }
-
-    void ActivateLoadingScreen()
-    {
-        loadingScreenCanvas.SetActive(true);
-    }
-
-    void DeactivateLoadingScreen()
-    {
-        loadingScreenCanvas.SetActive(false);
-    }
-
-    #region Scene Management
-    public void LoadScene(SceneSystem.GameScene _scene)
-    {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(_scene.ToString());
-        StartCoroutine(SceneSystem.LoadNextScene(operation));
-        StartCoroutine(FadeOut(2f));
-    }
-
-    public void LoadScene(string _scene)
-    {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(_scene);
-        StartCoroutine(SceneSystem.LoadNextScene(operation));
-        StartCoroutine(FadeOut(2f));
-    }
-
-    public void LoadMainMenuScene()
-    {
-        LoadScene(SceneSystem.GameScene.MainMenu);
-        musicSource.Play();
-    }
-
-    void OnSceneLoaded(Scene _scene, LoadSceneMode _mode)
-    {
-        DeactivateLoadingScreen();
-        InitSceneSettings();
-        if (sceneSettings.playNewTrack)
-        {
-            InitSceneSoundtrack();
-        }
-    }
-
-    #endregion
 
     public void QuitGame()
     {
@@ -143,13 +80,9 @@ public class GameManager : Singleton<GameManager>
     {
         string path = Application.persistentDataPath + "/GameSettings.json";
         if (File.Exists(path))
-        {
             gameSettings = JsonUtility.FromJson<GameSettings>(File.ReadAllText(path));
-        }
         else
-        {
             SetToDefaultSettings();
-        }
     }
     #endregion
 
@@ -157,18 +90,19 @@ public class GameManager : Singleton<GameManager>
     void InitSceneSettings()
     {
         if(sceneSettings != SceneSettings.Instance)
-        {
             sceneSettings = SceneSettings.Instance;
-            //if (sceneSettings.CanPause)
-            //{
-            //    InputManager.P_Input.Player_Default.PauseGame.performed += PauseCommand;
-            //}
-            //else
-            //{
-            //    InputManager.P_Input.Player_Default.PauseGame.performed -= PauseCommand;
-            //}
-            Cursor.lockState = sceneSettings.CursorLockMode;
+        if (sceneSettings.CanPause)
+        {
+            InputManager.P_Input.PlayerActions.Pause.performed += context => PauseGameToggle();
+            InputManager.P_Input.PauseActions.Resume.performed += context => PauseGameToggle();
         }
+        else
+        {
+            InputManager.P_Input.PlayerActions.Pause.performed -= context => PauseGameToggle();
+            InputManager.P_Input.PauseActions.Resume.performed -= context => PauseGameToggle();
+        }
+        Cursor.lockState = sceneSettings.CursorLockMode;
+        InitSceneSoundtrack();
     }
 
     void InitSceneSoundtrack()
@@ -259,15 +193,6 @@ public class GameManager : Singleton<GameManager>
             Cursor.lockState = sceneSettings.CursorLockMode;
             onGameResumed?.Invoke();
         }
-    }
-
-    void PauseCommand(InputAction.CallbackContext _context)
-    {
-        if(!sceneSettings)
-        {
-            InitSceneSettings();
-        }
-        PauseGameToggle();
     }
     #endregion
 }
