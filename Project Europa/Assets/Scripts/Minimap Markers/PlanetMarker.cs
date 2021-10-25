@@ -31,4 +31,12 @@ public class PlanetMarker : ObjectMarker
         spriteRenderer.sprite = offOrbitSprite;
         spriteRenderer.color = offOrbitColor;
     }
+
+    public override void InitializeMarker(Transform _target)
+    {
+        transform.parent = null;
+        transform.localScale = new Vector3(Scale, Scale, 1);
+        transform.parent = _target;
+        base.InitializeMarker(_target);
+    }
 }

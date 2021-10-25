@@ -36,8 +36,8 @@ public class PlanetaryOrbit : MonoBehaviour
 
     private void OnDisable()
     {
-        onOrbitEnter -= SetMaterialToClear;
-        onOrbitExit -= SetMaterialToDanger;
+        onOrbitEnter = null;
+        onOrbitExit = null;
     }
 
     private void SetMaterialToClear()

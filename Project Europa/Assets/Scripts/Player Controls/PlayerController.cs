@@ -13,19 +13,16 @@ public class PlayerController : MonoBehaviour
     [FoldoutGroup("Attributes"), SerializeField, Range(0f, 100f)] private float maxBackwardSpeed = 6f;
     [FoldoutGroup("Attributes"), SerializeField, Range(0f, 100f)] private float rotationSpeed = 5f;
 
-    private PlayerInput playerInput;
     private Vector2 moveInput;
 
     private void Awake()
     {
-        playerInput = InputManager.P_Input;
         if(rigidbody == null)
             rigidbody = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
     {
-        playerInput.PlayerActions.Enable();
         playerMarker.InitializeMarker(transform);
     }
 
@@ -59,13 +56,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnDisable()
-    {
-        playerInput.PlayerActions.Disable();
-    }
-
     private Vector2 GetMoveInput()
     {
-        return playerInput.PlayerActions.Movement.ReadValue<Vector2>();
+        return InputManager.P_Input.PlayerActions.Movement.ReadValue<Vector2>();
     }
 }

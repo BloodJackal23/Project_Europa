@@ -23,14 +23,12 @@ public class PlanetData : CelestialObjectData
 
     override protected void OnEnable()
     {
-        base.OnEnable();
+        rigidbody.velocity *= 0;
         InitializeProceduralData();
         SetComponentsValues();
         onDestroyed += DestroyPlanet;
         planetMarker = (PlanetMarker)objectMarker;
-        planetMarker.transform.parent = null;
-        planetMarker.transform.localScale = new Vector3(planetMarker.Scale, planetMarker.Scale, 1);
-        planetMarker.transform.parent = transform;
+        planetMarker.InitializeMarker(transform);
         orbit.onOrbitEnter += planetMarker.SetMarkerToOnOrbit;
         orbit.onOrbitExit += planetMarker.SetMarkerToOffOrbit;
         onDestroyed += LevelManager.Instance.ReduceRemainingPlanetsByOne;
@@ -39,8 +37,8 @@ public class PlanetData : CelestialObjectData
     private void OnDisable()
     {
         onDestroyed = null;
-        orbit.onOrbitEnter = null;
-        orbit.onOrbitExit = null;
+        orbit.onOrbitEnter -= planetMarker.SetMarkerToOnOrbit;
+        orbit.onOrbitExit -= planetMarker.SetMarkerToOffOrbit;
     }
 
     private void InitializeProceduralData()

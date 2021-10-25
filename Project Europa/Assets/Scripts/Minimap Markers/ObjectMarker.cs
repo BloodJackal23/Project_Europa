@@ -12,7 +12,7 @@ public class ObjectMarker : MonoBehaviour
     public float YOffset { get { return yOffset; } }
     public float Scale { get { return scale; } }
 
-    public void InitializeMarker(Transform _target)
+    public virtual void InitializeMarker(Transform _target)
     {
         transform.position = new Vector3(_target.position.x, yOffset, _target.position.z);
     }

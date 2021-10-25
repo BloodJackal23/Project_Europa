@@ -44,6 +44,7 @@ public class SolarSystem : Singleton<SolarSystem>
                 do
                     rand = Random.Range(0, MAX_PLANETS_COUNT);
                 while (selectedOrbits.Contains(orbits[rand]));
+                planets[rand].SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Drifting);
                 AssignOrbitToPlanet(orbits[rand], planets[rand]);
                 selectedOrbits.Add(orbits[rand]);
             }
@@ -51,7 +52,11 @@ public class SolarSystem : Singleton<SolarSystem>
         else
         {
             for(int i = 0; i < orbits.Length; i++)
+            {
+                planets[i].SetObjectStatus(CelestialObjectData.CelestialObjectStaus.Drifting);
                 AssignOrbitToPlanet(orbits[i], planets[i]);
+            }
+                
         }
     }
 

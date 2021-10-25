@@ -17,15 +17,20 @@ public class TetherGun : MonoBehaviour
     public bool IsTethered { get; private set; }
     public bool ReadyToFire { get; private set; }
 
-    private void OnEnable()
+    private void Start()
     {
         InputManager.P_Input.PlayerActions.Fire.started += context => Shoot();
         InputManager.P_Input.PlayerActions.Detach.started += context => StopTethering();
+    }
+
+    private void OnEnable()
+    {
+        
         ReadyToFire = true;
         tetherLine.enabled = false;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         InputManager.P_Input.PlayerActions.Fire.started -= context => Shoot();
         InputManager.P_Input.PlayerActions.Detach.started -= context => StopTethering();

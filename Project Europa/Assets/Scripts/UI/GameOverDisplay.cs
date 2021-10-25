@@ -20,6 +20,7 @@ public class GameOverDisplay : MonoBehaviour
     {
         SetCanvasGroupValues(1, true, true);
         roundScoreText.text = levelManager.Score.ToString("0000");
+        highScoreText.text = levelManager.HighScore.ToString("0000");
     }
 
     private void HideGameOver()

@@ -153,6 +153,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""010487fa-8724-4a22-94c1-1aa4cd649800"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -177,6 +185,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Replay"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bfb729fd-fe90-43ea-b914-b65f9aadf746"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -192,6 +211,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         // MenuAcions
         m_MenuAcions = asset.FindActionMap("MenuAcions", throwIfNotFound: true);
         m_MenuAcions_Replay = m_MenuAcions.FindAction("Replay", throwIfNotFound: true);
+        m_MenuAcions_Exit = m_MenuAcions.FindAction("Exit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -299,11 +319,13 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputActionMap m_MenuAcions;
     private IMenuAcionsActions m_MenuAcionsActionsCallbackInterface;
     private readonly InputAction m_MenuAcions_Replay;
+    private readonly InputAction m_MenuAcions_Exit;
     public struct MenuAcionsActions
     {
         private @PlayerInput m_Wrapper;
         public MenuAcionsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Replay => m_Wrapper.m_MenuAcions_Replay;
+        public InputAction @Exit => m_Wrapper.m_MenuAcions_Exit;
         public InputActionMap Get() { return m_Wrapper.m_MenuAcions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -316,6 +338,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Replay.started -= m_Wrapper.m_MenuAcionsActionsCallbackInterface.OnReplay;
                 @Replay.performed -= m_Wrapper.m_MenuAcionsActionsCallbackInterface.OnReplay;
                 @Replay.canceled -= m_Wrapper.m_MenuAcionsActionsCallbackInterface.OnReplay;
+                @Exit.started -= m_Wrapper.m_MenuAcionsActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_MenuAcionsActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_MenuAcionsActionsCallbackInterface.OnExit;
             }
             m_Wrapper.m_MenuAcionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -323,6 +348,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Replay.started += instance.OnReplay;
                 @Replay.performed += instance.OnReplay;
                 @Replay.canceled += instance.OnReplay;
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
             }
         }
     }
@@ -337,5 +365,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     public interface IMenuAcionsActions
     {
         void OnReplay(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
     }
 }
