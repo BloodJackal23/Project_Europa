@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 
 public class InputManager : Singleton<InputManager>
 {
-    public enum ActionMaps { PlayerActions, MenuActions}
+    public enum ActionMaps { PlayerActions, MenuActions, PauseActions}
 
     [FoldoutGroup("Read Only"), SerializeField, ReadOnly] private ActionMaps activeMap;
     private static PlayerInput playerInput;
@@ -36,6 +36,9 @@ public class InputManager : Singleton<InputManager>
             case ActionMaps.MenuActions:
                 playerInput.MenuAcions.Disable();
                 break;
+            case ActionMaps.PauseActions:
+                playerInput.PauseActions.Disable();
+                break;
         }
         
         switch (_map)
@@ -45,6 +48,9 @@ public class InputManager : Singleton<InputManager>
                 break;
             case ActionMaps.MenuActions:
                 playerInput.MenuAcions.Enable();
+                break;
+            case ActionMaps.PauseActions:
+                playerInput.PauseActions.Enable();
                 break;
         }
         Debug.Log(playerInput.PlayerActions.ToString() + " is set to " + playerInput.PlayerActions.enabled);

@@ -54,7 +54,8 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        InputManager.P_Input.PlayerActions.Pause.performed += context => QuitGame();
+        InputManager.P_Input.PlayerActions.Pause.performed += context => PauseGameToggle();
+        InputManager.P_Input.PauseActions.Resume.performed += context => PauseGameToggle();
         InputManager.P_Input.MenuAcions.Exit.performed += context => QuitGame();
         InitSceneSettings();
         //InitGameSettings();
@@ -62,7 +63,8 @@ public class GameManager : Singleton<GameManager>
 
     private void OnDestroy()
     {
-        InputManager.P_Input.PlayerActions.Pause.performed -= context => QuitGame();
+        InputManager.P_Input.PlayerActions.Pause.performed -= context => PauseGameToggle();
+        InputManager.P_Input.PauseActions.Resume.performed -= context => PauseGameToggle();
         InputManager.P_Input.MenuAcions.Exit.performed -= context => QuitGame();
         //SceneManager.sceneLoaded -= OnSceneLoaded;
         //SceneSystem.onLoadStart -= ActivateLoadingScreen;

@@ -198,6 +198,33 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""PauseActions"",
+            ""id"": ""a2070b60-c414-4dc7-9946-a87bf5b7c06d"",
+            ""actions"": [
+                {
+                    ""name"": ""Resume"",
+                    ""type"": ""Button"",
+                    ""id"": ""1fa4f7e5-7170-4e64-b091-62690616d6e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e747755c-c1a2-4778-b0d7-5635e1aecc18"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Resume"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -212,6 +239,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_MenuAcions = asset.FindActionMap("MenuAcions", throwIfNotFound: true);
         m_MenuAcions_Replay = m_MenuAcions.FindAction("Replay", throwIfNotFound: true);
         m_MenuAcions_Exit = m_MenuAcions.FindAction("Exit", throwIfNotFound: true);
+        // PauseActions
+        m_PauseActions = asset.FindActionMap("PauseActions", throwIfNotFound: true);
+        m_PauseActions_Resume = m_PauseActions.FindAction("Resume", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -355,6 +385,39 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         }
     }
     public MenuAcionsActions @MenuAcions => new MenuAcionsActions(this);
+
+    // PauseActions
+    private readonly InputActionMap m_PauseActions;
+    private IPauseActionsActions m_PauseActionsActionsCallbackInterface;
+    private readonly InputAction m_PauseActions_Resume;
+    public struct PauseActionsActions
+    {
+        private @PlayerInput m_Wrapper;
+        public PauseActionsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Resume => m_Wrapper.m_PauseActions_Resume;
+        public InputActionMap Get() { return m_Wrapper.m_PauseActions; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PauseActionsActions set) { return set.Get(); }
+        public void SetCallbacks(IPauseActionsActions instance)
+        {
+            if (m_Wrapper.m_PauseActionsActionsCallbackInterface != null)
+            {
+                @Resume.started -= m_Wrapper.m_PauseActionsActionsCallbackInterface.OnResume;
+                @Resume.performed -= m_Wrapper.m_PauseActionsActionsCallbackInterface.OnResume;
+                @Resume.canceled -= m_Wrapper.m_PauseActionsActionsCallbackInterface.OnResume;
+            }
+            m_Wrapper.m_PauseActionsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Resume.started += instance.OnResume;
+                @Resume.performed += instance.OnResume;
+                @Resume.canceled += instance.OnResume;
+            }
+        }
+    }
+    public PauseActionsActions @PauseActions => new PauseActionsActions(this);
     public interface IPlayerActionsActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -366,5 +429,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     {
         void OnReplay(InputAction.CallbackContext context);
         void OnExit(InputAction.CallbackContext context);
+    }
+    public interface IPauseActionsActions
+    {
+        void OnResume(InputAction.CallbackContext context);
     }
 }
